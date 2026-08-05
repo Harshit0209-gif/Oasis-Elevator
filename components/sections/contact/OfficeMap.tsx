@@ -1,0 +1,40 @@
+"use client";
+
+import { useState } from "react";
+import { MapPin } from "lucide-react";
+import { companyInfo } from "@/data/company";
+import { Button } from "@/components/ui/button";
+
+export function OfficeMap() {
+  const [loaded, setLoaded] = useState(false);
+  const { lat, lng } = companyInfo.geo;
+
+  if (!loaded) {
+    return (
+      <div className="relative flex h-full min-h-[320px] flex-col items-center justify-center gap-4 border border-hairline bg-bg-secondary p-8 text-center">
+        <MapPin className="size-8 text-gold" />
+        <div>
+          <p className="font-heading text-base font-medium text-bg-light">
+            {companyInfo.address.city}, {companyInfo.address.state}
+          </p>
+          <p className="mt-1 text-sm text-graphite">
+            {companyInfo.address.line1}, {companyInfo.address.line2}
+          </p>
+        </div>
+        <Button variant="outline-light" onClick={() => setLoaded(true)}>
+          Load Map
+        </Button>
+      </div>
+    );
+  }
+
+  return (
+    <iframe
+      title="Oasis Elevators office location"
+      src={`https://maps.google.com/maps?q=${lat},${lng}&z=15&output=embed`}
+      className="h-full min-h-[320px] w-full border border-hairline grayscale invert-[0.92] contrast-[1.1]"
+      loading="lazy"
+      referrerPolicy="no-referrer-when-downgrade"
+    />
+  );
+}
