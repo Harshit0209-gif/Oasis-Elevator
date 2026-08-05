@@ -8,10 +8,14 @@ import { ScrollIndicator } from "./ScrollIndicator";
 
 export function Hero() {
   return (
-    <section className="relative flex h-[100svh] min-h-[640px] items-end overflow-hidden bg-bg-primary">
+    <section className="relative flex min-h-[100svh] items-end bg-bg-primary">
       <HeroBackground />
 
-      <div className="container-oasis relative z-10 pb-28 md:pb-32">
+      {/* pt-28 guarantees clearance under the fixed nav even when the
+          content block is taller than the viewport on short/wide screens —
+          min-h-[100svh] (not h-[100svh]) then lets the section grow instead
+          of clipping the heading. */}
+      <div className="container-oasis relative z-10 w-full pt-28 pb-16 md:pb-24">
         <motion.p
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -21,7 +25,7 @@ export function Hero() {
           Possibilities Unlimited
         </motion.p>
 
-        <h1 className="max-w-4xl text-balance font-heading text-5xl font-medium leading-[1.05] text-bg-light sm:text-6xl md:text-7xl lg:text-8xl">
+        <h1 className="max-w-4xl text-balance font-heading text-4xl font-medium leading-[1.08] text-bg-light sm:text-5xl md:text-6xl lg:text-7xl">
           <motion.span
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
@@ -44,7 +48,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: premiumEase, delay: 0.7 }}
-          className="mt-8 max-w-lg text-balance text-base text-bg-light/70 md:text-lg"
+          className="mt-6 max-w-lg text-balance text-base text-bg-light/70 md:text-lg"
         >
           Premium elevators engineered for residential, commercial, healthcare, hospitality and
           industrial projects.
@@ -54,7 +58,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: premiumEase, delay: 0.85 }}
-          className="mt-10 flex flex-wrap items-center gap-4"
+          className="mt-8 flex flex-wrap items-center gap-4"
         >
           <Button variant="gold" size="xl" asChild>
             <a href="/solutions">Explore Solutions</a>

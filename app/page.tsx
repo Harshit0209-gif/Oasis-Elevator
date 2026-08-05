@@ -9,7 +9,6 @@ import { WhyOasis } from "@/components/sections/why-oasis/WhyOasis";
 import { ProcessShaft } from "@/components/sections/process/ProcessShaft";
 import { ProjectsPortfolio } from "@/components/sections/projects-portfolio/ProjectsPortfolio";
 import { Testimonials } from "@/components/sections/testimonials/Testimonials";
-import { MaintenancePlans } from "@/components/sections/maintenance-plans/MaintenancePlans";
 import { CertificationMarquee } from "@/components/sections/certifications/CertificationMarquee";
 import { FaqSection } from "@/components/sections/faq/FaqSection";
 import { ContactSection } from "@/components/sections/contact/ContactSection";
@@ -31,7 +30,6 @@ export default function Home() {
       <ProcessShaft />
       <ProjectsPortfolio />
       <Testimonials />
-      <MaintenancePlans />
       <CertificationMarquee />
       <FaqSection />
       <ContactSection />

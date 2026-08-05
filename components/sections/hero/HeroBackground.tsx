@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 
@@ -9,6 +9,7 @@ const HERO_IMAGE =
 
 export function HeroBackground() {
   const ref = useRef<HTMLDivElement>(null);
+  const [imageFailed, setImageFailed] = useState(false);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
@@ -19,23 +20,31 @@ export function HeroBackground() {
 
   return (
     <div ref={ref} className="absolute inset-0 overflow-hidden bg-bg-primary">
-      <motion.div style={{ y, opacity }} className="absolute inset-0">
-        <motion.div
-          initial={{ scale: 1 }}
-          animate={{ scale: 1.12 }}
-          transition={{ duration: 22, ease: "linear", repeat: Infinity, repeatType: "reverse" }}
-          className="absolute inset-0"
-        >
-          <Image
-            src={HERO_IMAGE}
-            alt="Low-angle view of premium glass skyscrapers reaching into the sky"
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover"
-          />
+      {/* Designed fallback — always present underneath, so a slow/blocked
+          third-party image load (ad-blockers, offline, CDN hiccups) never
+          leaves a flat void. The photo, when it loads, sits on top of this. */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_120%_80%_at_50%_0%,rgba(200,169,106,0.16),transparent_60%),linear-gradient(180deg,#1a1d22_0%,#111111_55%,#0b0b0b_100%)]" />
+
+      {!imageFailed && (
+        <motion.div style={{ y, opacity }} className="absolute inset-0">
+          <motion.div
+            initial={{ scale: 1 }}
+            animate={{ scale: 1.12 }}
+            transition={{ duration: 22, ease: "linear", repeat: Infinity, repeatType: "reverse" }}
+            className="absolute inset-0"
+          >
+            <Image
+              src={HERO_IMAGE}
+              alt="Low-angle view of premium glass skyscrapers reaching into the sky"
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover"
+              onError={() => setImageFailed(true)}
+            />
+          </motion.div>
         </motion.div>
-      </motion.div>
+      )}
 
       {/* Contrast + mood layers */}
       <div className="absolute inset-0 bg-gradient-to-t from-bg-primary via-bg-primary/50 to-bg-primary/30" />
