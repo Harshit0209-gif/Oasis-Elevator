@@ -5,7 +5,7 @@ import { TrustIndicators } from "@/components/sections/trust-indicators/TrustInd
 import { CertificationMarquee } from "@/components/sections/certifications/CertificationMarquee";
 import { CtaBand } from "@/components/shared/CtaBand";
 import { RevealOnScroll } from "@/components/shared/RevealOnScroll";
-import { GoldDivider } from "@/components/shared/GoldDivider";
+import { AccentDivider } from "@/components/shared/AccentDivider";
 
 export const metadata: Metadata = buildMetadata({
   title: "About",
@@ -29,8 +29,8 @@ export default function AboutPage() {
       <section className="bg-bg-primary py-24">
         <div className="container-oasis grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-20">
           <RevealOnScroll className="flex flex-col gap-5">
-            <GoldDivider />
-            <h2 className="font-heading text-2xl font-medium text-foreground md:text-3xl">
+            <AccentDivider />
+            <h2 className="font-heading text-2xl font-medium md:text-3xl">
               Engineering, not just installation.
             </h2>
             <p className="text-graphite leading-relaxed">
@@ -41,8 +41,8 @@ export default function AboutPage() {
             </p>
           </RevealOnScroll>
           <RevealOnScroll delay={0.1} className="flex flex-col gap-5">
-            <GoldDivider />
-            <h2 className="font-heading text-2xl font-medium text-foreground md:text-3xl">
+            <AccentDivider />
+            <h2 className="font-heading text-2xl font-medium md:text-3xl">
               A team obsessed with the details.
             </h2>
             <p className="text-graphite leading-relaxed">

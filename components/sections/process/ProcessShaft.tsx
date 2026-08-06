@@ -5,11 +5,13 @@ import { useGSAP } from "@gsap/react";
 import { processSteps } from "@/data/process-steps";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 import { RevealOnScroll } from "@/components/shared/RevealOnScroll";
+import { scaleIn } from "@/lib/motion";
 import { ensureGsapRegistered, gsap, ScrollTrigger } from "@/lib/gsap";
 import { useReducedMotion } from "@/lib/use-reduced-motion";
 import { cn } from "@/lib/utils";
 import { FloorMarker } from "./FloorMarker";
 import { ShaftTrack } from "./ShaftTrack";
+import { MobileProcessTrack } from "./MobileProcessTrack";
 
 const steps = [...processSteps].sort((a, b) => a.order - b.order);
 const total = steps.length;
@@ -18,7 +20,10 @@ export function ProcessShaft() {
   const rootRef = useRef<HTMLDivElement>(null);
   const pinWrapRef = useRef<HTMLDivElement>(null);
   const carRef = useRef<HTMLDivElement>(null);
+  const fillRef = useRef<HTMLDivElement>(null);
+  const floorRef = useRef<HTMLSpanElement>(null);
   const markerRefs = useRef<Array<HTMLDivElement | null>>([]);
+  const tickRefs = useRef<Array<HTMLDivElement | null>>([]);
   const reducedMotion = useReducedMotion();
 
   useGSAP(
@@ -44,11 +49,19 @@ export function ProcessShaft() {
           onUpdate: (self) => {
             const progress = self.progress;
             car.style.top = `${100 - progress * 100}%`;
+            if (fillRef.current) fillRef.current.style.height = `${progress * 100}%`;
 
             const activeIndex = Math.min(total - 1, Math.round(progress * (total - 1)));
+            if (floorRef.current) {
+              floorRef.current.textContent = String(activeIndex + 1).padStart(2, "0");
+            }
             markerRefs.current.forEach((marker, i) => {
               if (!marker) return;
-              marker.style.opacity = i === activeIndex ? "1" : "0.35";
+              marker.dataset.active = String(i === activeIndex);
+            });
+            tickRefs.current.forEach((tick, i) => {
+              if (!tick) return;
+              tick.dataset.passed = String(i <= activeIndex);
             });
           },
         });
@@ -63,7 +76,18 @@ export function ProcessShaft() {
 
   return (
     <section ref={rootRef} className="relative bg-bg-primary">
-      <div className="container-oasis pt-28 md:pt-36">
+      {/* Near-invisible architectural blueprint grid */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 opacity-[0.035]"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, #0C6584 1px, transparent 1px), linear-gradient(to bottom, #0C6584 1px, transparent 1px)",
+          backgroundSize: "44px 44px",
+        }}
+      />
+
+      <div className="container-oasis relative pt-28 md:pt-36">
         <SectionHeading
           eyebrow="Our Process"
           title="Seven floors to every project."
@@ -72,15 +96,27 @@ export function ProcessShaft() {
         />
       </div>
 
-      {/* Desktop — pinned, scroll-scrubbed shaft (skipped under reduced motion) */}
+      {/* Desktop — pinned, scroll-scrubbed shaft (skipped under reduced motion).
+          The entrance animation lives on a descendant of `.sticky`, never an
+          ancestor — a `transform` on any ancestor of a sticky element breaks
+          its positioning relative to the viewport. */}
       <div
         ref={pinWrapRef}
         className={cn("relative hidden md:block", reducedMotion && "md:hidden")}
         style={{ height: `${total * 90}vh` }}
       >
         <div className="sticky top-0 flex h-screen items-center overflow-hidden">
-          <div className="container-oasis relative h-[68vh] w-full">
-            <ShaftTrack ref={carRef} />
+          <RevealOnScroll
+            variants={scaleIn}
+            className="container-oasis relative h-[68vh] w-full"
+          >
+            <ShaftTrack
+              steps={steps}
+              carRef={carRef}
+              fillRef={fillRef}
+              floorRef={floorRef}
+              tickRefs={tickRefs}
+            />
             {steps.map((step, index) => (
               <FloorMarker
                 key={step.id}
@@ -92,27 +128,15 @@ export function ProcessShaft() {
                 topPercent={100 - (index / (total - 1)) * 100}
               />
             ))}
-          </div>
+          </RevealOnScroll>
         </div>
       </div>
 
-      {/* Mobile — and desktop-under-reduced-motion — simple stacked reveal */}
-      <div
-        className={cn(
-          "container-oasis flex flex-col gap-10 py-20 md:hidden",
-          reducedMotion && "md:flex",
-        )}
-      >
-        {steps.map((step) => (
-          <RevealOnScroll key={step.id} className="border-l-2 border-gold pl-5">
-            <span className="font-heading text-xs uppercase tracking-[0.25em] text-gold">
-              {String(step.order).padStart(2, "0")}
-            </span>
-            <h3 className="mt-1 font-heading text-xl font-medium text-bg-light">{step.title}</h3>
-            <p className="mt-2 text-sm text-graphite">{step.description}</p>
-          </RevealOnScroll>
-        ))}
-      </div>
+      {/* Mobile — and desktop-under-reduced-motion — one floor at a time */}
+      <MobileProcessTrack
+        steps={steps}
+        className={cn("relative md:hidden", reducedMotion && "md:block")}
+      />
     </section>
   );
 }

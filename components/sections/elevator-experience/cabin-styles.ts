@@ -20,9 +20,9 @@ export const MATERIAL_FLOOR: Record<string, string> = {
 };
 
 export const LIGHTING_GLOW: Record<string, string> = {
-  warm: "#f3d9a6",
-  clinical: "#dbe9f0",
-  ambient: "#e6cf9a",
+  warm: "#f0b877",
+  clinical: "#bfe4f7",
+  ambient: "#d8ecf7",
   industrial: "#c7ccd1",
   cool: "#c9d2da",
 };

@@ -21,10 +21,10 @@ export function CabinSelector({ types, activeId, onSelect }: CabinSelectorProps)
             aria-pressed={active}
             onClick={() => onSelect(type.id)}
             className={cn(
-              "border px-4 py-2.5 text-left font-heading text-sm font-medium transition-colors duration-300",
+              "rounded-full border px-4 py-2.5 text-left font-heading text-sm font-medium transition-colors duration-300",
               active
-                ? "border-gold bg-gold text-[#111111]"
-                : "border-hairline text-bg-light/70 hover:border-bg-light/40 hover:text-bg-light",
+                ? "border-brand-blue bg-brand-blue text-white"
+                : "border-hairline text-graphite hover:border-brand-blue/50 hover:text-brand-blue",
             )}
           >
             {type.name}

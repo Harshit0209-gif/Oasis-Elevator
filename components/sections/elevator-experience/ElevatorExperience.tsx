@@ -25,7 +25,7 @@ export function ElevatorExperience() {
           <CabinSelector types={cabinTypes} activeId={activeId} onSelect={setActiveId} />
 
           <div className="border-t border-hairline pt-6">
-            <h3 className="font-heading text-2xl font-medium text-bg-light">{activeType.name}</h3>
+            <h3 className="font-heading text-2xl font-medium">{activeType.name}</h3>
             <p className="mt-2 max-w-sm text-graphite">{activeType.description}</p>
           </div>
         </div>

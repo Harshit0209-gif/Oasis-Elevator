@@ -21,7 +21,7 @@ const contactSchema = z.object({
 type ContactFormValues = z.infer<typeof contactSchema>;
 
 const fieldClassName =
-  "h-12 rounded-none border-0 border-b border-hairline bg-transparent px-0 text-base text-bg-light placeholder:text-graphite/70 focus-visible:border-gold focus-visible:ring-0";
+  "h-12 rounded-none border-0 border-b border-hairline bg-transparent px-0 text-base text-foreground placeholder:text-graphite/70 focus-visible:border-brand-blue focus-visible:ring-0";
 
 export function ContactForm() {
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
@@ -51,13 +51,13 @@ export function ContactForm() {
 
   if (status === "success") {
     return (
-      <div className="flex flex-col items-center gap-4 border border-hairline bg-bg-secondary p-12 text-center">
-        <CheckCircle2 className="size-10 text-gold" />
-        <h3 className="font-heading text-xl font-medium text-bg-light">Request received.</h3>
+      <div className="flex flex-col items-center gap-4 rounded-2xl border border-hairline bg-bg-secondary p-12 text-center">
+        <CheckCircle2 className="size-10 text-brand-blue" />
+        <h3 className="font-heading text-xl font-medium">Request received.</h3>
         <p className="max-w-sm text-sm text-graphite">
           Thank you — our engineering team will reach out within one business day.
         </p>
-        <Button variant="outline-light" onClick={() => setStatus("idle")}>
+        <Button variant="outline" onClick={() => setStatus("idle")}>
           Send another request
         </Button>
       </div>
@@ -117,7 +117,7 @@ export function ContactForm() {
         <Textarea
           id="message"
           rows={4}
-          className="rounded-none border-0 border-b border-hairline bg-transparent px-0 text-base text-bg-light placeholder:text-graphite/70 focus-visible:border-gold focus-visible:ring-0"
+          className="rounded-none border-0 border-b border-hairline bg-transparent px-0 text-base text-foreground placeholder:text-graphite/70 focus-visible:border-brand-blue focus-visible:ring-0"
           {...register("message")}
         />
         {errors.message && <p className="text-xs text-destructive">{errors.message.message}</p>}
@@ -129,7 +129,7 @@ export function ContactForm() {
         </p>
       )}
 
-      <Button variant="gold" size="xl" type="submit" disabled={status === "submitting"}>
+      <Button size="xl" type="submit" disabled={status === "submitting"}>
         {status === "submitting" && <Loader2 className="size-4 animate-spin" />}
         Request Consultation
       </Button>

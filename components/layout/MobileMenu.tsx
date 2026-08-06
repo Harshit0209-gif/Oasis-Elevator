@@ -12,36 +12,34 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Logo } from "@/components/shared/Logo";
+import { cn } from "@/lib/utils";
 
-export function MobileMenu() {
+export function MobileMenu({ scrolled = false }: { scrolled?: boolean }) {
   const [open, setOpen] = useState(false);
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
         <Button
-          variant="outline-light"
+          variant={scrolled ? "outline" : "outline-light"}
           size="icon-lg"
-          className="lg:hidden"
+          className={cn("lg:hidden", scrolled && "border")}
           aria-label="Open menu"
         >
           <Menu className="size-5" />
         </Button>
       </SheetTrigger>
-      <SheetContent
-        side="right"
-        className="w-full border-hairline bg-bg-primary text-bg-light sm:max-w-sm"
-      >
+      <SheetContent side="right" className="w-full border-hairline bg-white sm:max-w-sm">
         <SheetTitle className="sr-only">Navigation menu</SheetTitle>
         <div className="flex h-full flex-col px-6 pt-8 pb-10">
-          <Logo variant="chip" />
+          <Logo />
 
           <nav className="mt-12 flex flex-col gap-1">
             {navLinks.map((link) => (
               <SheetClose asChild key={link.href}>
                 <a
                   href={link.href}
-                  className="border-b border-hairline py-4 font-heading text-2xl font-medium text-bg-light transition-colors hover:text-gold"
+                  className="border-b border-hairline py-4 font-heading text-2xl font-medium text-navy transition-colors hover:text-brand-blue"
                 >
                   {link.label}
                 </a>
@@ -51,7 +49,7 @@ export function MobileMenu() {
 
           <div className="mt-auto pt-8">
             <SheetClose asChild>
-              <Button variant="gold" size="xl" className="w-full" asChild>
+              <Button size="xl" className="w-full" asChild>
                 <a href="/contact">Request Quote</a>
               </Button>
             </SheetClose>

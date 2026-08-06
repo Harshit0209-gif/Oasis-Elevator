@@ -9,11 +9,11 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-hairline bg-bg-primary">
+    <footer className="bg-navy">
       <div className="container-oasis grid grid-cols-1 gap-12 py-20 md:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
         <div className="flex flex-col gap-6">
-          <Logo />
-          <p className="max-w-xs text-sm leading-relaxed text-graphite">
+          <Logo variant="chip" />
+          <p className="max-w-xs text-sm leading-relaxed text-white/70">
             {companyInfo.tagline} — premium vertical mobility engineered for architecture that
             demands more.
           </p>
@@ -21,21 +21,21 @@ export function Footer() {
             <a
               href={companyInfo.socials.linkedin}
               aria-label="Oasis Elevators on LinkedIn"
-              className="text-graphite transition-colors hover:text-gold"
+              className="text-accent-blue transition-colors hover:text-accent-orange"
             >
               <LinkedInIcon className="size-5" />
             </a>
             <a
               href={companyInfo.socials.instagram}
               aria-label="Oasis Elevators on Instagram"
-              className="text-graphite transition-colors hover:text-gold"
+              className="text-accent-blue transition-colors hover:text-accent-orange"
             >
               <InstagramIcon className="size-5" />
             </a>
             <a
               href={companyInfo.socials.youtube}
               aria-label="Oasis Elevators on YouTube"
-              className="text-graphite transition-colors hover:text-gold"
+              className="text-accent-blue transition-colors hover:text-accent-orange"
             >
               <YouTubeIcon className="size-5" />
             </a>
@@ -43,7 +43,7 @@ export function Footer() {
         </div>
 
         <div className="flex flex-col gap-4">
-          <h3 className="font-heading text-xs font-medium uppercase tracking-[0.25em] text-bg-light/50">
+          <h3 className="font-heading text-xs font-medium uppercase tracking-[0.25em] text-white/50">
             Quick Links
           </h3>
           <ul className="flex flex-col gap-3">
@@ -51,7 +51,7 @@ export function Footer() {
               <li key={link.href}>
                 <AnimatedUnderlineLink
                   href={link.href}
-                  className="text-sm text-bg-light/80 hover:text-bg-light"
+                  className="text-sm text-white/80 hover:text-white"
                 >
                   {link.label}
                 </AnimatedUnderlineLink>
@@ -61,7 +61,7 @@ export function Footer() {
         </div>
 
         <div className="flex flex-col gap-4">
-          <h3 className="font-heading text-xs font-medium uppercase tracking-[0.25em] text-bg-light/50">
+          <h3 className="font-heading text-xs font-medium uppercase tracking-[0.25em] text-white/50">
             Products
           </h3>
           <ul className="flex flex-col gap-3">
@@ -69,7 +69,7 @@ export function Footer() {
               <li key={product.id}>
                 <AnimatedUnderlineLink
                   href={`/products#${product.slug}`}
-                  className="text-sm text-bg-light/80 hover:text-bg-light"
+                  className="text-sm text-white/80 hover:text-white"
                 >
                   {product.name}
                 </AnimatedUnderlineLink>
@@ -79,22 +79,22 @@ export function Footer() {
         </div>
 
         <div className="flex flex-col gap-4">
-          <h3 className="font-heading text-xs font-medium uppercase tracking-[0.25em] text-bg-light/50">
+          <h3 className="font-heading text-xs font-medium uppercase tracking-[0.25em] text-white/50">
             Contact
           </h3>
-          <ul className="flex flex-col gap-3 text-sm text-bg-light/80">
+          <ul className="flex flex-col gap-3 text-sm text-white/80">
             <li>
               {companyInfo.address.line1}, {companyInfo.address.line2}
               <br />
               {companyInfo.address.city}, {companyInfo.address.state} {companyInfo.address.postalCode}
             </li>
             <li>
-              <a href={`tel:${companyInfo.phone}`} className="hover:text-gold">
+              <a href={`tel:${companyInfo.phone}`} className="hover:text-accent-orange">
                 {companyInfo.phone}
               </a>
             </li>
             <li>
-              <a href={`mailto:${companyInfo.email}`} className="hover:text-gold">
+              <a href={`mailto:${companyInfo.email}`} className="hover:text-accent-orange">
                 {companyInfo.email}
               </a>
             </li>
@@ -102,8 +102,8 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-hairline">
-        <div className="container-oasis flex flex-col items-center justify-between gap-4 py-6 text-xs text-graphite md:flex-row">
+      <div className="border-t border-white/10">
+        <div className="container-oasis flex flex-col items-center justify-between gap-4 py-6 text-xs text-white/60 md:flex-row">
           <p>
             © {year} {companyInfo.legalName}. All rights reserved.
           </p>

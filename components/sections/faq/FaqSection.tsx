@@ -20,7 +20,7 @@ export function FaqSection() {
         <Accordion type="single" collapsible className="flex flex-col">
           {faqs.map((faq) => (
             <AccordionItem key={faq.id} value={faq.id} className="border-hairline py-2">
-              <AccordionTrigger className="py-5 font-heading text-base font-medium text-bg-light hover:no-underline md:text-lg [&_svg]:text-gold">
+              <AccordionTrigger className="py-5 font-heading text-base font-medium hover:no-underline md:text-lg [&_svg]:text-brand-blue">
                 {faq.question}
               </AccordionTrigger>
               <AccordionContent className="pb-6 text-base leading-relaxed text-graphite">

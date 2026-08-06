@@ -26,7 +26,7 @@ export function Testimonials() {
         />
         <div className="flex gap-3">
           <Button
-            variant="outline-light"
+            variant="outline"
             size="icon-lg"
             aria-label="Previous testimonial"
             onClick={() => scrollByCard(-1)}
@@ -34,7 +34,7 @@ export function Testimonials() {
             <ArrowLeft className="size-4" />
           </Button>
           <Button
-            variant="outline-light"
+            variant="outline"
             size="icon-lg"
             aria-label="Next testimonial"
             onClick={() => scrollByCard(1)}

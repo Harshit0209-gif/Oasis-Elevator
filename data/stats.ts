@@ -6,5 +6,4 @@ export const stats: Stat[] = [
   { id: "experience", value: 25, suffix: "+", label: "Years of Engineering Excellence" },
   { id: "clients", value: 850, suffix: "+", label: "Happy Clients" },
   { id: "service", value: 24, suffix: "/7", label: "Service Availability" },
-  { id: "states", value: 18, suffix: "+", label: "States Covered" },
 ];

@@ -6,8 +6,10 @@
 
 /* ==========================================================================
    Oasis Elevators — design tokens
-   Single dark-luxury theme (no light/dark toggle). Gold is a rare accent,
-   never a base color — see usage notes on --gold below.
+   Light-first corporate brand system (Apple x KONE x Schindler). Orange is a
+   rare accent — active nav, stat underlines, small icons, badges — never a
+   section background. See COLOR DISTRIBUTION note below.
+   80% white/off-white, 15% brand blue, 5% accent orange.
    ========================================================================== */
 
 @theme inline {
@@ -17,14 +19,15 @@
   --font-heading: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 
-  /* Brand palette, exposed as plain utilities: bg-gold, text-graphite, border-hairline, etc. */
-  --color-gold: var(--gold);
-  --color-gold-hover: var(--gold-hover);
-  --color-champagne: var(--champagne);
+  /* Brand palette, exposed as plain utilities: bg-brand-blue, text-navy, border-hairline, etc. */
+  --color-navy: var(--navy);
+  --color-brand-blue: var(--brand-blue);
+  --color-brand-blue-hover: var(--brand-blue-hover);
+  --color-accent-blue: var(--accent-blue);
+  --color-accent-orange: var(--accent-orange);
   --color-bg-primary: var(--bg-primary);
   --color-bg-secondary: var(--bg-secondary);
-  --color-bg-light: var(--bg-light);
-  --color-ink: var(--ink);
+  --color-surface: var(--surface);
   --color-graphite: var(--graphite);
   --color-hairline: var(--hairline);
 
@@ -67,77 +70,77 @@
 }
 
 :root {
-  /* Raw brand hex values — reference directly in inline styles / GSAP as var(--gold) etc. */
-  --gold: #c8a96a;
-  --gold-hover: #b99456;
-  --champagne: #d6b87a;
-  --bg-primary: #111111;
-  --bg-secondary: #1d232a;
-  --bg-light: #f7f7f5;
-  --ink: #1b1b1b;
-  /* Brief specifies #6B7280 as "Secondary Text," but this site is dark-first
-     and #6B7280 on #111111 fails WCAG AA (3.9:1) for body copy. Lightened to
-     #9CA3AF (7.4:1) to stay accessible while reading as the same muted gray. */
-  --graphite: #9ca3af;
-  --hairline: #2d2d2d;
+  /* Raw brand hex values — reference directly in inline styles / GSAP as var(--brand-blue) etc. */
+  --navy: #11215c;
+  --brand-blue: #0c6584;
+  --brand-blue-hover: #11215c;
+  --accent-blue: #1faae2;
+  --accent-orange: #e58a2a;
+  --bg-primary: #fafaf8;
+  --bg-secondary: #ffffff;
+  --surface: #f4f7f8;
+  --graphite: #6b7280;
+  --hairline: #e5e7eb;
 
   /* shadcn semantic tokens, mapped to the palette above so every generated
      UI primitive (Button, Sheet, Accordion, Input...) inherits the brand
      without per-component overrides. */
   --background: var(--bg-primary);
-  --foreground: var(--bg-light);
-  --card: var(--bg-secondary);
-  --card-foreground: var(--bg-light);
-  --popover: var(--bg-secondary);
-  --popover-foreground: var(--bg-light);
-  --primary: var(--gold);
-  --primary-foreground: #111111;
-  --secondary: var(--bg-secondary);
-  --secondary-foreground: var(--bg-light);
-  --muted: var(--bg-secondary);
+  --foreground: #1f2937;
+  --card: #ffffff;
+  --card-foreground: #1f2937;
+  --popover: #ffffff;
+  --popover-foreground: #1f2937;
+  --primary: var(--brand-blue);
+  --primary-foreground: #ffffff;
+  --secondary: var(--surface);
+  --secondary-foreground: var(--navy);
+  --muted: var(--surface);
   --muted-foreground: var(--graphite);
-  --accent: var(--hairline);
-  --accent-foreground: var(--bg-light);
-  --destructive: oklch(0.704 0.191 22.216);
+  /* Neutral on purpose — accent-orange is reserved for deliberate small
+     highlights, never a generic hover/accent background. */
+  --accent: var(--surface);
+  --accent-foreground: var(--navy);
+  --destructive: oklch(0.577 0.245 27.325);
   --border: var(--hairline);
   --input: var(--hairline);
-  --ring: var(--gold);
-  --chart-1: var(--gold);
-  --chart-2: var(--champagne);
-  --chart-3: oklch(0.556 0 0);
-  --chart-4: oklch(0.439 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --radius: 0.4rem;
-  --sidebar: var(--bg-secondary);
-  --sidebar-foreground: var(--bg-light);
-  --sidebar-primary: var(--gold);
-  --sidebar-primary-foreground: #111111;
-  --sidebar-accent: var(--hairline);
-  --sidebar-accent-foreground: var(--bg-light);
+  --ring: var(--brand-blue);
+  --chart-1: var(--brand-blue);
+  --chart-2: var(--accent-blue);
+  --chart-3: var(--accent-orange);
+  --chart-4: var(--navy);
+  --chart-5: oklch(0.708 0 0);
+  --radius: 0.75rem;
+  --sidebar: #ffffff;
+  --sidebar-foreground: #1f2937;
+  --sidebar-primary: var(--brand-blue);
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: var(--surface);
+  --sidebar-accent-foreground: var(--navy);
   --sidebar-border: var(--hairline);
-  --sidebar-ring: var(--gold);
+  --sidebar-ring: var(--brand-blue);
 }
 
-/* No separate .dark palette — this brand has one theme, and it's dark. */
+/* No separate .dark palette — this brand has one theme, and it's light. */
 .dark {
   --background: var(--bg-primary);
-  --foreground: var(--bg-light);
-  --card: var(--bg-secondary);
-  --card-foreground: var(--bg-light);
-  --popover: var(--bg-secondary);
-  --popover-foreground: var(--bg-light);
-  --primary: var(--gold);
-  --primary-foreground: #111111;
-  --secondary: var(--bg-secondary);
-  --secondary-foreground: var(--bg-light);
-  --muted: var(--bg-secondary);
+  --foreground: #1f2937;
+  --card: #ffffff;
+  --card-foreground: #1f2937;
+  --popover: #ffffff;
+  --popover-foreground: #1f2937;
+  --primary: var(--brand-blue);
+  --primary-foreground: #ffffff;
+  --secondary: var(--surface);
+  --secondary-foreground: var(--navy);
+  --muted: var(--surface);
   --muted-foreground: var(--graphite);
-  --accent: var(--hairline);
-  --accent-foreground: var(--bg-light);
-  --destructive: oklch(0.704 0.191 22.216);
+  --accent: var(--surface);
+  --accent-foreground: var(--navy);
+  --destructive: oklch(0.577 0.245 27.325);
   --border: var(--hairline);
   --input: var(--hairline);
-  --ring: var(--gold);
+  --ring: var(--brand-blue);
 }
 
 @layer base {
@@ -151,7 +154,7 @@
     @apply bg-background text-foreground;
   }
   h1, h2, h3, h4, h5, h6 {
-    @apply font-heading;
+    @apply font-heading text-navy;
   }
 }
 

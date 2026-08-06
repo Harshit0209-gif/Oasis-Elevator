@@ -11,7 +11,7 @@ export const cabinTypes: CabinType[] = [
     panelMaterial: "brushed-steel",
     lightingTone: "warm",
     doorStyle: "center-split",
-    accentColor: "#C8A96A",
+    accentColor: "#0C6584",
     description: "Refined brushed steel panels with warm ambient lighting.",
   },
   {
@@ -20,7 +20,7 @@ export const cabinTypes: CabinType[] = [
     panelMaterial: "matte-white",
     lightingTone: "clinical",
     doorStyle: "wide-split",
-    accentColor: "#8FB8C8",
+    accentColor: "#1FAAE2",
     description: "Antimicrobial matte panels under clean, clinical light.",
   },
   {
@@ -29,7 +29,7 @@ export const cabinTypes: CabinType[] = [
     panelMaterial: "glass",
     lightingTone: "ambient",
     doorStyle: "glass-slide",
-    accentColor: "#D6B87A",
+    accentColor: "#E58A2A",
     description: "Panoramic glass walls with soft ambient LED lighting.",
   },
   {
@@ -38,7 +38,7 @@ export const cabinTypes: CabinType[] = [
     panelMaterial: "reinforced-steel",
     lightingTone: "industrial",
     doorStyle: "vertical-lift",
-    accentColor: "#9AA5AD",
+    accentColor: "#11215C",
     description: "Reinforced steel plating built for continuous heavy load.",
   },
   {
@@ -47,7 +47,7 @@ export const cabinTypes: CabinType[] = [
     panelMaterial: "walnut-veneer",
     lightingTone: "warm",
     doorStyle: "center-split",
-    accentColor: "#C8A96A",
+    accentColor: "#0C6584",
     description: "Walnut veneer panelling finished for private residences.",
   },
   {
@@ -56,7 +56,7 @@ export const cabinTypes: CabinType[] = [
     panelMaterial: "matte-graphite",
     lightingTone: "cool",
     doorStyle: "center-split",
-    accentColor: "#6B7280",
+    accentColor: "#1FAAE2",
     description: "Compact drive engineering behind a minimal matte facade.",
   },
   {
@@ -65,7 +65,7 @@ export const cabinTypes: CabinType[] = [
     panelMaterial: "brushed-steel",
     lightingTone: "industrial",
     doorStyle: "wide-split",
-    accentColor: "#B99456",
+    accentColor: "#11215C",
     description: "Precision hydraulics behind a durable brushed steel shell.",
   },
 ];

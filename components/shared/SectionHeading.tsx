@@ -28,7 +28,12 @@ export function SectionHeading({
     >
       {eyebrow && (
         <RevealOnScroll>
-          <span className="font-heading text-xs font-medium uppercase tracking-[0.3em] text-gold">
+          <span
+            className={cn(
+              "font-heading text-xs font-medium uppercase tracking-[0.3em]",
+              light ? "text-accent-blue" : "text-brand-blue",
+            )}
+          >
             {eyebrow}
           </span>
         </RevealOnScroll>
@@ -37,7 +42,7 @@ export function SectionHeading({
         <h2
           className={cn(
             "text-balance font-heading text-4xl font-medium leading-[1.1] md:text-5xl lg:text-6xl",
-            light ? "text-bg-light" : "text-foreground",
+            light && "text-white",
           )}
         >
           {title}
@@ -48,7 +53,7 @@ export function SectionHeading({
           <p
             className={cn(
               "max-w-xl text-balance text-base md:text-lg",
-              light ? "text-bg-light/70" : "text-graphite",
+              light ? "text-white/70" : "text-graphite",
             )}
           >
             {description}

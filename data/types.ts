@@ -24,7 +24,11 @@ export interface Industry {
   image: ImageAsset;
 }
 
-export type ProductLayoutVariant = "wide" | "tall" | "split" | "feature";
+export interface ProductSpecs {
+  capacity: string;
+  speed: string;
+  idealFor: string;
+}
 
 export interface Product {
   id: string;
@@ -33,8 +37,7 @@ export interface Product {
   category: string;
   shortDescription: string;
   features: string[];
-  image: ImageAsset;
-  layoutVariant: ProductLayoutVariant;
+  specs: ProductSpecs;
 }
 
 export interface CabinType {

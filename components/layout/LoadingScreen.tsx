@@ -69,7 +69,7 @@ export function LoadingScreen() {
           </motion.div>
           <div className="h-px w-40 overflow-hidden bg-hairline">
             <motion.div
-              className="h-full bg-gold"
+              className="h-full bg-brand-blue"
               initial={{ width: "0%" }}
               animate={{ width: "100%" }}
               transition={{ duration: LINE_DURATION_MS / 1000, ease: [0.16, 1, 0.3, 1] }}

@@ -22,10 +22,10 @@ export function ContactSection() {
         </RevealOnScroll>
 
         <RevealOnScroll delay={0.1} className="flex flex-col gap-6">
-          <ul className="flex flex-col gap-5 border border-hairline bg-bg-primary p-8">
+          <ul className="flex flex-col gap-5 rounded-2xl border border-hairline bg-bg-primary p-8">
             <li className="flex items-start gap-4">
-              <MapPin className="mt-0.5 size-5 shrink-0 text-gold" />
-              <span className="text-sm text-bg-light/80">
+              <MapPin className="mt-0.5 size-5 shrink-0 text-brand-blue" />
+              <span className="text-sm">
                 {companyInfo.address.line1}, {companyInfo.address.line2}
                 <br />
                 {companyInfo.address.city}, {companyInfo.address.state}{" "}
@@ -33,14 +33,14 @@ export function ContactSection() {
               </span>
             </li>
             <li className="flex items-center gap-4">
-              <Phone className="size-5 shrink-0 text-gold" />
-              <a href={`tel:${companyInfo.phone}`} className="text-sm text-bg-light/80">
+              <Phone className="size-5 shrink-0 text-brand-blue" />
+              <a href={`tel:${companyInfo.phone}`} className="text-sm">
                 {companyInfo.phone}
               </a>
             </li>
             <li className="flex items-center gap-4">
-              <Mail className="size-5 shrink-0 text-gold" />
-              <a href={`mailto:${companyInfo.email}`} className="text-sm text-bg-light/80">
+              <Mail className="size-5 shrink-0 text-brand-blue" />
+              <a href={`mailto:${companyInfo.email}`} className="text-sm">
                 {companyInfo.email}
               </a>
             </li>
@@ -49,15 +49,13 @@ export function ContactSection() {
             </li>
           </ul>
 
-          <div className="flex items-start gap-4 border border-gold/40 bg-bg-primary p-6">
-            <PhoneCall className="mt-0.5 size-5 shrink-0 text-gold" />
+          <div className="flex items-start gap-4 rounded-2xl border border-accent-orange/40 bg-bg-primary p-6">
+            <PhoneCall className="mt-0.5 size-5 shrink-0 text-accent-orange" />
             <div>
-              <p className="font-heading text-sm font-medium text-bg-light">
-                24×7 Emergency Support
-              </p>
+              <p className="font-heading text-sm font-medium">24×7 Emergency Support</p>
               <a
                 href={`tel:${companyInfo.emergencyPhone}`}
-                className="text-sm text-gold hover:text-gold-hover"
+                className="text-sm text-accent-orange hover:text-navy"
               >
                 {companyInfo.emergencyPhone}
               </a>

@@ -4,7 +4,7 @@ import { solutions } from "@/data/solutions";
 import { PageHero } from "@/components/shared/PageHero";
 import { CtaBand } from "@/components/shared/CtaBand";
 import { RevealOnScroll } from "@/components/shared/RevealOnScroll";
-import { GoldDivider } from "@/components/shared/GoldDivider";
+import { AccentDivider } from "@/components/shared/AccentDivider";
 
 export const metadata: Metadata = buildMetadata({
   title: "Solutions",
@@ -29,14 +29,14 @@ export default function SolutionsPage() {
               delay={index * 0.06}
               className="grid grid-cols-1 gap-4 border-b border-hairline py-10 last:border-b-0 md:grid-cols-[auto_1fr] md:items-center md:gap-16 md:py-14"
             >
-              <span className="font-heading text-5xl font-medium text-gold/50 md:text-6xl">
+              <span className="font-heading text-5xl font-medium text-brand-blue/40 md:text-6xl">
                 {String(index + 1).padStart(2, "0")}
               </span>
               <div className="flex flex-col gap-3">
-                <h2 className="font-heading text-2xl font-medium text-foreground md:text-3xl">
+                <h2 className="font-heading text-2xl font-medium md:text-3xl">
                   {solution.title}
                 </h2>
-                <GoldDivider />
+                <AccentDivider />
                 <p className="max-w-lg text-graphite">{solution.description}</p>
               </div>
             </RevealOnScroll>

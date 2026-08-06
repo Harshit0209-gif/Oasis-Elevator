@@ -22,9 +22,9 @@ export function CertificationMarquee() {
           {track.map((cert, index) => (
             <div
               key={`${cert.id}-${index}`}
-              className="flex w-56 flex-none flex-col items-center gap-2 border border-hairline px-6 py-8 text-center"
+              className="flex w-56 flex-none flex-col items-center gap-2 rounded-2xl border border-hairline px-6 py-8 text-center shadow-sm"
             >
-              <span className="font-heading text-lg font-medium tracking-[0.05em] text-bg-light">
+              <span className="font-heading text-lg font-medium tracking-[0.05em]">
                 {cert.abbreviation}
               </span>
               <span className="text-xs uppercase tracking-[0.1em] text-graphite">

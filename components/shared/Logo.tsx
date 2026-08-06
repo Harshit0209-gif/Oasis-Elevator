@@ -4,10 +4,11 @@ import { cn } from "@/lib/utils";
 
 interface LogoProps {
   /**
-   * "chip" wraps the mark in a soft light backing so its navy/blue palette
-   * stays legible on the site's dark surfaces — there is no true light-on-dark
-   * source asset yet (see public/logo/README.md). "plain" renders it as-is,
-   * for light-background contexts.
+   * "plain" renders the mark as-is — correct for this site's light
+   * backgrounds (its own navy/blue palette reads naturally there). "chip"
+   * wraps it in a soft white backing, needed only on dark surfaces like the
+   * Footer, since there's no true light-on-dark source asset yet (see
+   * public/logo/README.md).
    */
   variant?: "chip" | "plain";
   className?: string;
@@ -15,14 +16,14 @@ interface LogoProps {
   priority?: boolean;
 }
 
-export function Logo({ variant = "chip", className, imgClassName, priority }: LogoProps) {
+export function Logo({ variant = "plain", className, imgClassName, priority }: LogoProps) {
   return (
     <Link
       href="/"
       aria-label="Oasis Elevators — home"
       className={cn(
         "inline-flex items-center rounded-lg transition-opacity hover:opacity-90",
-        variant === "chip" && "bg-bg-light/95 px-3 py-1.5 shadow-[0_1px_0_rgba(0,0,0,0.04)]",
+        variant === "chip" && "bg-white/95 px-3 py-1.5 shadow-[0_1px_0_rgba(0,0,0,0.04)]",
         className,
       )}
     >

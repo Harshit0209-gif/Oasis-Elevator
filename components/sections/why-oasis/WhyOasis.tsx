@@ -1,6 +1,7 @@
 import { whyOasisFeatures } from "@/data/why-oasis";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 import { FeatureSplit } from "./FeatureSplit";
+import { WhyOasisMobileScroller } from "./WhyOasisMobileScroller";
 
 export function WhyOasis() {
   return (
@@ -13,7 +14,9 @@ export function WhyOasis() {
         />
       </div>
 
-      <div className="container-oasis">
+      <WhyOasisMobileScroller features={whyOasisFeatures} className="md:hidden" />
+
+      <div className="container-oasis hidden md:block">
         {whyOasisFeatures.map((feature) => (
           <FeatureSplit key={feature.id} feature={feature} />
         ))}

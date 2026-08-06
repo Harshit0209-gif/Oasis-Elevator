@@ -3,6 +3,7 @@ import { SectionHeading } from "@/components/shared/SectionHeading";
 import { RevealOnScroll } from "@/components/shared/RevealOnScroll";
 import { fadeIn } from "@/lib/motion";
 import { IndustryCard } from "./IndustryCard";
+import { IndustryMobileGallery } from "./IndustryMobileGallery";
 
 export function IndustriesShowcase() {
   return (
@@ -15,7 +16,9 @@ export function IndustriesShowcase() {
         />
       </div>
 
-      <RevealOnScroll variants={fadeIn}>
+      <IndustryMobileGallery industries={industries} />
+
+      <RevealOnScroll variants={fadeIn} className="hidden lg:block">
         <div className="flex flex-col border-y border-hairline lg:flex-row">
           {industries.map((industry, index) => (
             <IndustryCard key={industry.id} industry={industry} index={index} />
