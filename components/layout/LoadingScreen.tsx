@@ -1,8 +1,5 @@
-"use client";
-
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import Image from "next/image";
 import { useReducedMotion } from "@/lib/use-reduced-motion";
 
 const SESSION_KEY = "oasis-loaded";
@@ -58,12 +55,12 @@ export function LoadingScreen() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           >
-            <Image
+            <img
               src="/logo/oasis-logo.png"
               alt="Oasis Elevators"
               width={821}
               height={250}
-              priority
+              fetchPriority="high"
               className="h-10 w-auto"
             />
           </motion.div>

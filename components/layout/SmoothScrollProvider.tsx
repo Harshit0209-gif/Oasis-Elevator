@@ -1,7 +1,5 @@
-"use client";
-
 import { useEffect, type ReactNode } from "react";
-import { createLenis } from "@/lib/lenis";
+import { createLenis, destroyLenis } from "@/lib/lenis";
 import { ensureGsapRegistered, ScrollTrigger } from "@/lib/gsap";
 import { useReducedMotion } from "@/lib/use-reduced-motion";
 
@@ -30,7 +28,7 @@ export function SmoothScrollProvider({ children }: { children: ReactNode }) {
     return () => {
       cancelAnimationFrame(rafId);
       ScrollTrigger.removeEventListener("refresh", ticker);
-      lenis.destroy();
+      destroyLenis(lenis);
     };
   }, [reducedMotion]);
 

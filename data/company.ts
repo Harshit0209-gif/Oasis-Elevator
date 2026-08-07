@@ -1,28 +1,31 @@
-// PLACEHOLDER CONTENT — replace with verified Oasis Elevators business data before launch.
+// Sourced from https://oasiselevators.co.in/ (fetched 2026-08-07). Geo
+// coordinates are an approximate New Town/Nabadiganta, Kolkata pin — not
+// geocoded from a verified source. Business hours aren't listed on the live
+// site and are a reasonable placeholder pending confirmation.
 import type { CompanyInfo } from "./types";
 
 export const companyInfo: CompanyInfo = {
   legalName: "Oasis Elevators Pvt. Ltd.",
-  tagline: "Possibilities Unlimited",
-  phone: "+91 98765 43210",
-  emergencyPhone: "+91 1800 123 4567",
-  email: "info@oasiselevators.com",
+  tagline: "Building Up Vision, Leading Future",
+  phone: "+91 90023 43706",
+  emergencyPhone: "+91 94311 86893",
+  email: "info@oasiselevators.co.in",
   address: {
-    line1: "Level 14, Oasis Engineering Tower",
-    line2: "Cyber City, Sector 24",
-    city: "Gurugram",
-    state: "Haryana",
-    postalCode: "122002",
+    line1: "Uttaran Regency",
+    line2: "19 No. Nabadiganta",
+    city: "Kolkata",
+    state: "West Bengal",
+    postalCode: "700094",
     country: "India",
   },
   geo: {
-    lat: 28.4949,
-    lng: 77.0891,
+    lat: 22.5958,
+    lng: 88.4497,
   },
-  hours: "Mon – Sat, 9:00 AM – 7:00 PM · Emergency support 24/7",
+  hours: "Mon – Sat, 9:00 AM – 7:00 PM",
   socials: {
-    linkedin: "https://linkedin.com",
-    instagram: "https://instagram.com",
-    youtube: "https://youtube.com",
+    facebook: "https://www.facebook.com/oasiselevators18/?ti=as",
+    linkedin: "https://www.linkedin.com/in/oasis-elevators-06362b157/",
+    instagram: "https://www.instagram.com/oasiselevators/",
   },
 };

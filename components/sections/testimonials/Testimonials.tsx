@@ -1,5 +1,3 @@
-"use client";
-
 import { useRef } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { testimonials } from "@/data/testimonials";

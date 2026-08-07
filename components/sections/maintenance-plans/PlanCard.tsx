@@ -1,4 +1,5 @@
 import { Check } from "lucide-react";
+import { Link } from "react-router-dom";
 import type { MaintenancePlan } from "@/data/types";
 import { RevealOnScroll } from "@/components/shared/RevealOnScroll";
 import { Button } from "@/components/ui/button";
@@ -40,7 +41,7 @@ export function PlanCard({ plan, delay }: { plan: MaintenancePlan; delay?: numbe
       </ul>
 
       <Button variant={plan.recommended ? "default" : "outline"} size="xl" asChild>
-        <a href="/contact">Get Started</a>
+        <Link to="/contact">Get Started</Link>
       </Button>
     </RevealOnScroll>
   );

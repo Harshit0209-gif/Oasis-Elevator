@@ -1,9 +1,8 @@
-// PLACEHOLDER CONTENT — replace with verified performance figures before launch.
+// Sourced from https://oasiselevators.co.in/ (fetched 2026-08-07).
 import type { Stat } from "./types";
 
 export const stats: Stat[] = [
-  { id: "projects", value: 1200, suffix: "+", label: "Projects Completed" },
-  { id: "experience", value: 25, suffix: "+", label: "Years of Engineering Excellence" },
-  { id: "clients", value: 850, suffix: "+", label: "Happy Clients" },
-  { id: "service", value: 24, suffix: "/7", label: "Service Availability" },
+  { id: "staff", value: 250, suffix: "+", label: "Staff Members" },
+  { id: "awards", value: 125, suffix: "+", label: "Awards Won" },
+  { id: "satisfaction", value: 100, suffix: "%", label: "Satisfied Customers" },
 ];

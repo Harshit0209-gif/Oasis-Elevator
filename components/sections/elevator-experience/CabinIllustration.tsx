@@ -1,5 +1,3 @@
-"use client";
-
 import { motion } from "framer-motion";
 import type { CabinType } from "@/data/types";
 import { LIGHTING_GLOW, MATERIAL_FLOOR, MATERIAL_WALL } from "./cabin-styles";

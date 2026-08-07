@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { RevealOnScroll } from "@/components/shared/RevealOnScroll";
 
@@ -20,7 +21,7 @@ export function CtaBand({
         <h2 className="text-balance font-heading text-3xl font-medium md:text-4xl">{title}</h2>
         {description && <p className="max-w-lg text-balance text-graphite">{description}</p>}
         <Button size="xl" asChild>
-          <a href={primaryHref}>{primaryLabel}</a>
+          <Link to={primaryHref}>{primaryLabel}</Link>
         </Button>
       </RevealOnScroll>
     </section>

@@ -3,7 +3,7 @@ import { companyInfo } from "@/data/company";
 import { products } from "@/data/products";
 import { Logo } from "@/components/shared/Logo";
 import { AnimatedUnderlineLink } from "@/components/shared/AnimatedUnderlineLink";
-import { InstagramIcon, LinkedInIcon, YouTubeIcon } from "@/components/shared/SocialIcons";
+import { FacebookIcon, InstagramIcon, LinkedInIcon } from "@/components/shared/SocialIcons";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -19,6 +19,13 @@ export function Footer() {
           </p>
           <div className="flex items-center gap-4">
             <a
+              href={companyInfo.socials.facebook}
+              aria-label="Oasis Elevators on Facebook"
+              className="text-accent-blue transition-colors hover:text-accent-orange"
+            >
+              <FacebookIcon className="size-5" />
+            </a>
+            <a
               href={companyInfo.socials.linkedin}
               aria-label="Oasis Elevators on LinkedIn"
               className="text-accent-blue transition-colors hover:text-accent-orange"
@@ -31,13 +38,6 @@ export function Footer() {
               className="text-accent-blue transition-colors hover:text-accent-orange"
             >
               <InstagramIcon className="size-5" />
-            </a>
-            <a
-              href={companyInfo.socials.youtube}
-              aria-label="Oasis Elevators on YouTube"
-              className="text-accent-blue transition-colors hover:text-accent-orange"
-            >
-              <YouTubeIcon className="size-5" />
             </a>
           </div>
         </div>

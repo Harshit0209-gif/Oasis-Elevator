@@ -1,5 +1,4 @@
-import Image from "next/image";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
 
 interface LogoProps {
@@ -19,7 +18,7 @@ interface LogoProps {
 export function Logo({ variant = "plain", className, imgClassName, priority }: LogoProps) {
   return (
     <Link
-      href="/"
+      to="/"
       aria-label="Oasis Elevators — home"
       className={cn(
         "inline-flex items-center rounded-lg transition-opacity hover:opacity-90",
@@ -27,12 +26,12 @@ export function Logo({ variant = "plain", className, imgClassName, priority }: L
         className,
       )}
     >
-      <Image
+      <img
         src="/logo/oasis-logo.png"
-        alt="Oasis Elevators — Possibilities Unlimited"
+        alt="Oasis Elevators — Building Up Vision, Leading Future"
         width={821}
         height={250}
-        priority={priority}
+        fetchPriority={priority ? "high" : undefined}
         className={cn("h-8 w-auto md:h-9", imgClassName)}
       />
     </Link>

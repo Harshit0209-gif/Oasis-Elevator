@@ -1,5 +1,3 @@
-"use client";
-
 import { useRef, useState } from "react";
 import type { Industry } from "@/data/types";
 import { OptimizedImage } from "@/components/shared/OptimizedImage";
@@ -30,6 +28,7 @@ export function IndustryMobileGallery({ industries }: { industries: Industry[] }
       <div
         ref={scrollerRef}
         onScroll={handleScroll}
+        data-lenis-prevent
         className="flex snap-x snap-mandatory overflow-x-auto scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         {industries.map((industry, index) => (

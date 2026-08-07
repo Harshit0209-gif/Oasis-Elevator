@@ -1,7 +1,5 @@
-"use client";
-
 import { useState } from "react";
-import { usePathname } from "next/navigation";
+import { useLocation, Link } from "react-router-dom";
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { navLinks } from "@/data/nav";
 import { Logo } from "@/components/shared/Logo";
@@ -13,7 +11,7 @@ import { MobileMenu } from "./MobileMenu";
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const { scrollY } = useScroll();
-  const pathname = usePathname();
+  const { pathname } = useLocation();
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     setScrolled(latest > 24);
@@ -63,7 +61,7 @@ export function Navbar() {
 
         <div className="hidden lg:block">
           <Button size="xl" asChild>
-            <a href="/contact">Request Quote</a>
+            <Link to="/contact">Request Quote</Link>
           </Button>
         </div>
 

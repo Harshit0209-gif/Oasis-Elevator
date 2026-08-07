@@ -1,6 +1,5 @@
-"use client";
-
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { premiumEase } from "@/lib/motion";
 import { HeroBackground } from "./HeroBackground";
@@ -22,7 +21,7 @@ export function Hero() {
           transition={{ duration: 0.7, ease: premiumEase, delay: 0.2 }}
           className="mb-6 font-heading text-xs font-medium uppercase tracking-[0.35em] text-accent-orange"
         >
-          Possibilities Unlimited
+          Building Up Vision, Leading Future
         </motion.p>
 
         <h1 className="max-w-4xl text-balance font-heading text-4xl font-medium leading-[1.08] text-white sm:text-5xl md:text-6xl lg:text-7xl">
@@ -61,10 +60,10 @@ export function Hero() {
           className="mt-8 flex flex-wrap items-center gap-4"
         >
           <Button size="xl" asChild>
-            <a href="/solutions">Explore Solutions</a>
+            <Link to="/solutions">Explore Solutions</Link>
           </Button>
           <Button variant="outline-light" size="xl" asChild>
-            <a href="/contact">Get Consultation</a>
+            <Link to="/contact">Get Consultation</Link>
           </Button>
         </motion.div>
       </div>

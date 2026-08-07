@@ -1,20 +1,18 @@
-import type { Metadata } from "next";
-import { buildMetadata } from "@/lib/seo";
+import { Seo } from "@/lib/seo";
 import { solutions } from "@/data/solutions";
 import { PageHero } from "@/components/shared/PageHero";
 import { CtaBand } from "@/components/shared/CtaBand";
 import { RevealOnScroll } from "@/components/shared/RevealOnScroll";
 import { AccentDivider } from "@/components/shared/AccentDivider";
 
-export const metadata: Metadata = buildMetadata({
-  title: "Solutions",
-  description: "End-to-end vertical mobility solutions — installation, modernization, maintenance and design consultancy.",
-  path: "/solutions",
-});
-
-export default function SolutionsPage() {
+export function SolutionsPage() {
   return (
     <>
+      <Seo
+        title="Solutions"
+        description="End-to-end vertical mobility solutions — installation, modernization, maintenance and design consultancy."
+        path="/solutions"
+      />
       <PageHero
         eyebrow="Solutions"
         title="Vertical mobility, fully engineered."

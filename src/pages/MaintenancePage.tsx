@@ -1,19 +1,17 @@
-import type { Metadata } from "next";
-import { buildMetadata } from "@/lib/seo";
+import { Seo } from "@/lib/seo";
 import { PageHero } from "@/components/shared/PageHero";
 import { MaintenancePlans } from "@/components/sections/maintenance-plans/MaintenancePlans";
 import { FaqSection } from "@/components/sections/faq/FaqSection";
 import { CtaBand } from "@/components/shared/CtaBand";
 
-export const metadata: Metadata = buildMetadata({
-  title: "Maintenance Plans",
-  description: "Three tiers of ongoing care — from essential upkeep to round-the-clock white-glove service.",
-  path: "/maintenance",
-});
-
-export default function MaintenancePage() {
+export function MaintenancePage() {
   return (
     <>
+      <Seo
+        title="Maintenance Plans"
+        description="Three tiers of ongoing care — from essential upkeep to round-the-clock white-glove service."
+        path="/maintenance"
+      />
       <PageHero
         eyebrow="Maintenance"
         title="Care that never clocks out."

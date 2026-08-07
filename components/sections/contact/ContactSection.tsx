@@ -52,7 +52,7 @@ export function ContactSection() {
           <div className="flex items-start gap-4 rounded-2xl border border-accent-orange/40 bg-bg-primary p-6">
             <PhoneCall className="mt-0.5 size-5 shrink-0 text-accent-orange" />
             <div>
-              <p className="font-heading text-sm font-medium">24×7 Emergency Support</p>
+              <p className="font-heading text-sm font-medium">Alternate Contact Number</p>
               <a
                 href={`tel:${companyInfo.emergencyPhone}`}
                 className="text-sm text-accent-orange hover:text-navy"

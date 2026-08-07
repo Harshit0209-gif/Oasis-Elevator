@@ -1,6 +1,5 @@
-"use client";
-
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Menu } from "lucide-react";
 import { navLinks } from "@/data/nav";
 import { Button } from "@/components/ui/button";
@@ -37,12 +36,12 @@ export function MobileMenu({ scrolled = false }: { scrolled?: boolean }) {
           <nav className="mt-12 flex flex-col gap-1">
             {navLinks.map((link) => (
               <SheetClose asChild key={link.href}>
-                <a
-                  href={link.href}
+                <Link
+                  to={link.href}
                   className="border-b border-hairline py-4 font-heading text-2xl font-medium text-navy transition-colors hover:text-brand-blue"
                 >
                   {link.label}
-                </a>
+                </Link>
               </SheetClose>
             ))}
           </nav>
@@ -50,7 +49,7 @@ export function MobileMenu({ scrolled = false }: { scrolled?: boolean }) {
           <div className="mt-auto pt-8">
             <SheetClose asChild>
               <Button size="xl" className="w-full" asChild>
-                <a href="/contact">Request Quote</a>
+                <Link to="/contact">Request Quote</Link>
               </Button>
             </SheetClose>
           </div>

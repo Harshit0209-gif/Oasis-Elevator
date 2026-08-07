@@ -1,5 +1,4 @@
-import type { Metadata } from "next";
-import { buildMetadata, buildLocalBusinessJsonLd } from "@/lib/seo";
+import { Seo, LocalBusinessJsonLd } from "@/lib/seo";
 import { PageHero } from "@/components/shared/PageHero";
 import { TrustIndicators } from "@/components/sections/trust-indicators/TrustIndicators";
 import { CertificationMarquee } from "@/components/sections/certifications/CertificationMarquee";
@@ -7,19 +6,15 @@ import { CtaBand } from "@/components/shared/CtaBand";
 import { RevealOnScroll } from "@/components/shared/RevealOnScroll";
 import { AccentDivider } from "@/components/shared/AccentDivider";
 
-export const metadata: Metadata = buildMetadata({
-  title: "About",
-  description: "Oasis Elevators engineers premium vertical mobility for India's most ambitious buildings.",
-  path: "/about",
-});
-
-export default function AboutPage() {
+export function AboutPage() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(buildLocalBusinessJsonLd()) }}
+      <Seo
+        title="About"
+        description="Oasis Elevators engineers premium vertical mobility for India's most ambitious buildings."
+        path="/about"
       />
+      <LocalBusinessJsonLd />
       <PageHero
         eyebrow="About Oasis"
         title="Possibilities unlimited."

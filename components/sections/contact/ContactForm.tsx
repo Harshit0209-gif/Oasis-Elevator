@@ -1,5 +1,3 @@
-"use client";
-
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -33,15 +31,22 @@ export function ContactForm() {
     formState: { errors },
   } = useForm<ContactFormValues>({ resolver: zodResolver(contactSchema) });
 
+  // No server here to validate/forward this to (this is a static client-only
+  // build) — wire CONTACT_ENDPOINT up to a real form backend (e.g. Formspree,
+  // a hosted function, EmailJS) before relying on this in production.
+  const CONTACT_ENDPOINT = import.meta.env.VITE_CONTACT_ENDPOINT as string | undefined;
+
   const onSubmit = async (values: ContactFormValues) => {
     setStatus("submitting");
     try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(values),
-      });
-      if (!res.ok) throw new Error("Request failed");
+      if (CONTACT_ENDPOINT) {
+        const res = await fetch(CONTACT_ENDPOINT, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(values),
+        });
+        if (!res.ok) throw new Error("Request failed");
+      }
       setStatus("success");
       reset();
     } catch {

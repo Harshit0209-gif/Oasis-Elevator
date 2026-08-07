@@ -40,6 +40,12 @@ export interface Product {
   specs: ProductSpecs;
 }
 
+export interface Accessory {
+  id: string;
+  name: string;
+  description: string;
+}
+
 export interface CabinType {
   id: string;
   name: string;
@@ -66,15 +72,9 @@ export interface WhyOasisFeature {
   imagePosition: "left" | "right";
 }
 
-export interface Project {
+export interface Client {
   id: string;
-  slug: string;
   name: string;
-  location: string;
-  buildingType: string;
-  productsUsed: string[];
-  image: ImageAsset;
-  year: number;
 }
 
 export interface Testimonial {
@@ -133,8 +133,8 @@ export interface CompanyInfo {
   };
   hours: string;
   socials: {
+    facebook: string;
     linkedin: string;
     instagram: string;
-    youtube: string;
   };
 }

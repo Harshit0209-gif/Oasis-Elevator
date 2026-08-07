@@ -1,4 +1,3 @@
-import Image from "next/image";
 import type { Testimonial } from "@/data/types";
 
 export function TestimonialSlide({ testimonial }: { testimonial: Testimonial }) {
@@ -11,12 +10,11 @@ export function TestimonialSlide({ testimonial }: { testimonial: Testimonial }) 
         </p>
         <div className="mt-auto flex items-center gap-4">
           <div className="relative size-14 shrink-0 overflow-hidden rounded-full">
-            <Image
+            <img
               src={testimonial.photo.src}
               alt={testimonial.photo.alt}
-              fill
-              sizes="56px"
-              className="object-cover"
+              loading="lazy"
+              className="absolute inset-0 h-full w-full object-cover"
             />
           </div>
           <div>

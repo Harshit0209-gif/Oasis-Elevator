@@ -1,19 +1,17 @@
-import type { Metadata } from "next";
-import { buildMetadata } from "@/lib/seo";
+import { Seo } from "@/lib/seo";
 import { industries } from "@/data/industries";
 import { PageHero } from "@/components/shared/PageHero";
 import { CtaBand } from "@/components/shared/CtaBand";
 import { IndustryListCard } from "@/components/sections/industries/IndustryListCard";
 
-export const metadata: Metadata = buildMetadata({
-  title: "Industries",
-  description: "Engineered mobility for residential, commercial, healthcare and industrial buildings.",
-  path: "/industries",
-});
-
-export default function IndustriesPage() {
+export function IndustriesPage() {
   return (
     <>
+      <Seo
+        title="Industries"
+        description="Engineered mobility for residential, commercial, healthcare and industrial buildings."
+        path="/industries"
+      />
       <PageHero
         eyebrow="Industries"
         title="Built for every vertical."

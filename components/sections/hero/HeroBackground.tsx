@@ -1,8 +1,5 @@
-"use client";
-
 import { useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import Image from "next/image";
 
 const HERO_IMAGE =
   "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=85&w=2400&auto=format&fit=crop";
@@ -33,13 +30,12 @@ export function HeroBackground() {
             transition={{ duration: 22, ease: "linear", repeat: Infinity, repeatType: "reverse" }}
             className="absolute inset-0"
           >
-            <Image
+            <img
               src={HERO_IMAGE}
               alt="Low-angle view of premium glass skyscrapers reaching into the sky"
-              fill
-              priority
-              sizes="100vw"
-              className="object-cover"
+              loading="eager"
+              fetchPriority="high"
+              className="absolute inset-0 h-full w-full object-cover"
               onError={() => setImageFailed(true)}
             />
           </motion.div>

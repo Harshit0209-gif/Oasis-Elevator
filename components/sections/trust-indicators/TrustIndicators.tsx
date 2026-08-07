@@ -5,7 +5,7 @@ import { AnimatedCounter } from "./AnimatedCounter";
 export function TrustIndicators() {
   return (
     <section className="border-y border-hairline bg-bg-secondary">
-      <div className="container-oasis grid grid-cols-2 divide-x divide-y divide-hairline py-14 md:grid-cols-4 md:divide-y-0">
+      <div className="container-oasis grid grid-cols-1 divide-y divide-hairline py-14 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
         {stats.map((stat, index) => (
           <RevealOnScroll
             key={stat.id}

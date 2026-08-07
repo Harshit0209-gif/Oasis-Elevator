@@ -1,75 +1,70 @@
-"use client";
-
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import { processSteps } from "@/data/process-steps";
 import { SectionHeading } from "@/components/shared/SectionHeading";
-import { RevealOnScroll } from "@/components/shared/RevealOnScroll";
-import { scaleIn } from "@/lib/motion";
-import { ensureGsapRegistered, gsap, ScrollTrigger } from "@/lib/gsap";
+import { ensureGsapRegistered, ScrollTrigger } from "@/lib/gsap";
 import { useReducedMotion } from "@/lib/use-reduced-motion";
-import { cn } from "@/lib/utils";
-import { FloorMarker } from "./FloorMarker";
-import { ShaftTrack } from "./ShaftTrack";
-import { MobileProcessTrack } from "./MobileProcessTrack";
+import { ShaftColumn } from "./ShaftColumn";
+import { FloorContent } from "./FloorContent";
 
 const steps = [...processSteps].sort((a, b) => a.order - b.order);
 const total = steps.length;
 
+// One elevator-shaft interaction, reused at every viewport width — the
+// shaft sits sticky on the left, the content track slides past it on the
+// right, both driven by the same scroll-progress value. No separate mobile
+// concept: only the shaft column's share of the width changes.
 export function ProcessShaft() {
   const rootRef = useRef<HTMLDivElement>(null);
-  const pinWrapRef = useRef<HTMLDivElement>(null);
+  const driverRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
   const carRef = useRef<HTMLDivElement>(null);
   const fillRef = useRef<HTMLDivElement>(null);
   const floorRef = useRef<HTMLSpanElement>(null);
-  const markerRefs = useRef<Array<HTMLDivElement | null>>([]);
+  const floorRefs = useRef<Array<HTMLDivElement | null>>([]);
   const tickRefs = useRef<Array<HTMLDivElement | null>>([]);
   const reducedMotion = useReducedMotion();
 
   useGSAP(
     () => {
-      // Scroll-jacked pin/scrub is a motion-heavy effect — skip it entirely
-      // when the user prefers reduced motion, falling back to the same
-      // static stacked list mobile gets.
       if (reducedMotion) return;
 
       ensureGsapRegistered();
-      const mm = gsap.matchMedia();
+      const driver = driverRef.current;
+      const car = carRef.current;
+      const track = trackRef.current;
+      if (!driver || !car || !track) return;
 
-      mm.add("(min-width: 768px)", () => {
-        const car = carRef.current;
-        const pinWrap = pinWrapRef.current;
-        if (!car || !pinWrap) return;
+      const trigger = ScrollTrigger.create({
+        trigger: driver,
+        start: "top top",
+        end: "bottom bottom",
+        scrub: 0.6,
+        onUpdate: (self) => {
+          const progress = self.progress;
+          car.style.top = `${100 - progress * 100}%`;
+          if (fillRef.current) fillRef.current.style.height = `${progress * 100}%`;
+          // translateY's % resolves against the track's OWN height (which is
+          // total*100% tall), not one floor's slice — so the shift has to be
+          // scaled down by /total to land on floor boundaries correctly.
+          track.style.transform = `translateY(-${(progress * (total - 1) * 100) / total}%)`;
 
-        const trigger = ScrollTrigger.create({
-          trigger: pinWrap,
-          start: "top top",
-          end: "bottom bottom",
-          scrub: 0.6,
-          onUpdate: (self) => {
-            const progress = self.progress;
-            car.style.top = `${100 - progress * 100}%`;
-            if (fillRef.current) fillRef.current.style.height = `${progress * 100}%`;
-
-            const activeIndex = Math.min(total - 1, Math.round(progress * (total - 1)));
-            if (floorRef.current) {
-              floorRef.current.textContent = String(activeIndex + 1).padStart(2, "0");
-            }
-            markerRefs.current.forEach((marker, i) => {
-              if (!marker) return;
-              marker.dataset.active = String(i === activeIndex);
-            });
-            tickRefs.current.forEach((tick, i) => {
-              if (!tick) return;
-              tick.dataset.passed = String(i <= activeIndex);
-            });
-          },
-        });
-
-        return () => trigger.kill();
+          const activeIndex = Math.min(total - 1, Math.round(progress * (total - 1)));
+          if (floorRef.current) {
+            floorRef.current.textContent = String(activeIndex + 1).padStart(2, "0");
+          }
+          tickRefs.current.forEach((tick, i) => {
+            if (!tick) return;
+            tick.dataset.passed = String(i <= activeIndex);
+          });
+          floorRefs.current.forEach((floor, i) => {
+            if (!floor) return;
+            floor.dataset.state = i === activeIndex ? "active" : i < activeIndex ? "passed" : "upcoming";
+          });
+        },
       });
 
-      return () => mm.revert();
+      return () => trigger.kill();
     },
     { scope: rootRef, dependencies: [reducedMotion] },
   );
@@ -87,7 +82,7 @@ export function ProcessShaft() {
         }}
       />
 
-      <div className="container-oasis relative pt-28 md:pt-36">
+      <div className="container-oasis relative pt-24 md:pt-32">
         <SectionHeading
           eyebrow="Our Process"
           title="Seven floors to every project."
@@ -96,47 +91,56 @@ export function ProcessShaft() {
         />
       </div>
 
-      {/* Desktop — pinned, scroll-scrubbed shaft (skipped under reduced motion).
-          The entrance animation lives on a descendant of `.sticky`, never an
-          ancestor — a `transform` on any ancestor of a sticky element breaks
-          its positioning relative to the viewport. */}
-      <div
-        ref={pinWrapRef}
-        className={cn("relative hidden md:block", reducedMotion && "md:hidden")}
-        style={{ height: `${total * 90}vh` }}
-      >
-        <div className="sticky top-0 flex h-screen items-center overflow-hidden">
-          <RevealOnScroll
-            variants={scaleIn}
-            className="container-oasis relative h-[68vh] w-full"
-          >
-            <ShaftTrack
+      {reducedMotion ? (
+        <div className="container-oasis flex flex-col gap-10 py-16 md:flex-row md:gap-16">
+          <div className="flex h-[60vh] w-full max-w-[220px] self-start md:sticky md:top-24 md:w-[26%]">
+            <ShaftColumn
               steps={steps}
               carRef={carRef}
               fillRef={fillRef}
               floorRef={floorRef}
               tickRefs={tickRefs}
+              total={total}
             />
-            {steps.map((step, index) => (
-              <FloorMarker
-                key={step.id}
-                ref={(el) => {
-                  markerRefs.current[index] = el;
-                }}
-                step={step}
-                side={index % 2 === 0 ? "left" : "right"}
-                topPercent={100 - (index / (total - 1)) * 100}
-              />
+          </div>
+          <div className="flex flex-1 flex-col gap-14">
+            {steps.map((step) => (
+              <FloorContent key={step.id} step={step} />
             ))}
-          </RevealOnScroll>
+          </div>
         </div>
-      </div>
-
-      {/* Mobile — and desktop-under-reduced-motion — one floor at a time */}
-      <MobileProcessTrack
-        steps={steps}
-        className={cn("relative md:hidden", reducedMotion && "md:block")}
-      />
+      ) : (
+        <div ref={driverRef} className="relative" style={{ height: `${total * 100}vh` }}>
+          <div className="sticky top-0 flex h-screen">
+            <div className="container-oasis flex h-full w-full">
+              <div className="h-full w-[30%] min-w-[84px] max-w-[220px] shrink-0 border-r border-hairline/60 sm:w-[28%] md:w-[26%] lg:w-[25%]">
+                <ShaftColumn
+                  steps={steps}
+                  carRef={carRef}
+                  fillRef={fillRef}
+                  floorRef={floorRef}
+                  tickRefs={tickRefs}
+                  total={total}
+                />
+              </div>
+              <div className="relative h-full flex-1 overflow-hidden">
+                <div ref={trackRef} className="flex flex-col" style={{ height: `${total * 100}%` }}>
+                  {steps.map((step, index) => (
+                    <FloorContent
+                      key={step.id}
+                      ref={(el) => {
+                        floorRefs.current[index] = el;
+                      }}
+                      step={step}
+                      style={{ height: `${100 / total}%` }}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

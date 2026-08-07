@@ -1,5 +1,3 @@
-"use client";
-
 import { useState } from "react";
 import { cabinTypes } from "@/data/cabin-config";
 import { SectionHeading } from "@/components/shared/SectionHeading";
