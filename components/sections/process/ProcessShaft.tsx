@@ -10,6 +10,14 @@ import { FloorContent } from "./FloorContent";
 const steps = [...processSteps].sort((a, b) => a.order - b.order);
 const total = steps.length;
 
+// Scroll distance per floor, as a percentage of one viewport height. 100
+// would mean "scroll a full screen to advance one floor" — dropping to 65
+// tightens the gap between floors by ~35% so the ride reads as continuous
+// rather than a series of separate screens (each floor's own content still
+// gets a full viewport-height "slot" to sit in — this only shortens the
+// scroll distance, not the content layout).
+const SCROLL_PER_FLOOR = 65;
+
 // One elevator-shaft interaction, reused at every viewport width — the
 // shaft sits sticky on the left, the content track slides past it on the
 // right, both driven by the same scroll-progress value. No separate mobile
@@ -103,14 +111,14 @@ export function ProcessShaft() {
               total={total}
             />
           </div>
-          <div className="flex flex-1 flex-col gap-14">
+          <div className="flex flex-1 flex-col gap-9">
             {steps.map((step) => (
               <FloorContent key={step.id} step={step} />
             ))}
           </div>
         </div>
       ) : (
-        <div ref={driverRef} className="relative" style={{ height: `${total * 100}svh` }}>
+        <div ref={driverRef} className="relative" style={{ height: `${total * SCROLL_PER_FLOOR}svh` }}>
           <div className="sticky top-0 flex h-[100svh]">
             <div className="container-oasis flex h-full w-full">
               <div className="h-full w-[30%] min-w-[84px] max-w-[220px] shrink-0 border-r border-hairline/60 sm:w-[28%] md:w-[26%] lg:w-[25%]">

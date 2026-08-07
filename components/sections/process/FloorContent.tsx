@@ -23,10 +23,10 @@ export const FloorContent = forwardRef<HTMLDivElement, FloorContentProps>(({ ste
       ref={ref}
       data-state="upcoming"
       style={style}
-      className="flex w-full shrink-0 flex-col justify-center gap-3 px-6 transition-opacity duration-300 ease-out sm:px-10 md:px-14 data-[state=active]:opacity-100 data-[state=passed]:opacity-35 data-[state=upcoming]:opacity-35"
+      className="group flex w-full shrink-0 scale-[0.97] flex-col justify-center gap-3 px-6 opacity-30 transition-[opacity,transform] duration-300 ease-out sm:px-10 md:px-14 data-[state=active]:scale-100 data-[state=active]:opacity-100 data-[state=passed]:opacity-30"
     >
       {Icon && (
-        <div className="flex size-10 items-center justify-center rounded-full bg-brand-blue/8 sm:size-11">
+        <div className="flex size-10 items-center justify-center rounded-full bg-brand-blue/8 transition-colors duration-300 group-data-[state=active]:bg-brand-blue/15 sm:size-11">
           <Icon className="size-4.5 text-brand-blue sm:size-5" strokeWidth={1.75} />
         </div>
       )}
