@@ -1,5 +1,6 @@
 import { clients } from "@/data/clients";
 import { SectionHeading } from "@/components/shared/SectionHeading";
+import { AutoScrollMarquee } from "@/components/shared/AutoScrollMarquee";
 
 export function ClientsMarquee() {
   const track = [...clients, ...clients];
@@ -15,23 +16,18 @@ export function ClientsMarquee() {
         />
       </div>
 
-      <div className="group relative overflow-hidden">
-        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-bg-secondary to-transparent" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-bg-secondary to-transparent" />
-
-        <div className="flex w-max animate-marquee gap-6 [@media(hover:hover)]:group-hover:[animation-play-state:paused]">
-          {track.map((client, index) => (
-            <div
-              key={`${client.id}-${index}`}
-              className="flex w-64 flex-none items-center justify-center rounded-2xl border border-hairline px-6 py-8 text-center shadow-sm"
-            >
-              <span className="font-heading text-lg font-medium tracking-[0.02em] text-navy">
-                {client.name}
-              </span>
-            </div>
-          ))}
-        </div>
-      </div>
+      <AutoScrollMarquee gapClassName="gap-6" fadeFromClassName="from-bg-secondary">
+        {track.map((client, index) => (
+          <div
+            key={`${client.id}-${index}`}
+            className="flex w-64 flex-none items-center justify-center rounded-2xl border border-hairline px-6 py-8 text-center shadow-sm"
+          >
+            <span className="font-heading text-lg font-medium tracking-[0.02em] text-navy">
+              {client.name}
+            </span>
+          </div>
+        ))}
+      </AutoScrollMarquee>
     </section>
   );
 }

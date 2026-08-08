@@ -18,10 +18,3 @@ export function destroyLenis(lenis: Lenis) {
   lenis.destroy();
   if (activeLenis === lenis) activeLenis = null;
 }
-
-// Lets a nested scroll-snap deck (e.g. WhyOasisMobileScroller) hand a fast
-// "get me out of here" swipe off to the page's own smooth scroll, instead of
-// forcing the user to step through every remaining card.
-export function getActiveLenis() {
-  return activeLenis;
-}

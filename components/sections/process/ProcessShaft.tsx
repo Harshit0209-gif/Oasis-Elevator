@@ -101,7 +101,7 @@ export function ProcessShaft() {
 
       {reducedMotion ? (
         <div className="container-oasis flex flex-col gap-10 py-16 md:flex-row md:gap-16">
-          <div className="flex h-[60svh] w-full max-w-[220px] self-start md:sticky md:top-24 md:w-[26%]">
+          <div className="sticky top-20 flex h-[55svh] w-full max-w-[220px] self-start md:top-24 md:h-[60svh] md:w-[26%]">
             <ShaftColumn
               steps={steps}
               carRef={carRef}
