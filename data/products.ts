@@ -1,5 +1,11 @@
 // PLACEHOLDER CONTENT — spec values are illustrative/typical-range; replace with real spec sheets before launch.
+// Passenger, Hospital, Home, MRL and Hydraulic photos are real Oasis installation
+// photography (sourced from oasiselevators.co.in/ProductDetails.aspx) — the full
+// real product catalog, confirmed against that page (Capsule and Freight are not
+// real Oasis product lines and have been removed).
 import type { Product } from "./types";
+
+const oasis = (name: string) => `/images/products/${name}.jpg`;
 
 export const products: Product[] = [
   {
@@ -15,6 +21,10 @@ export const products: Product[] = [
       speed: "1.0–1.75 m/s",
       idealFor: "Mid to high-rise buildings",
     },
+    image: {
+      src: oasis("passenger-3"),
+      alt: "Brushed-steel passenger elevator interior with control panel",
+    },
   },
   {
     id: "hospital",
@@ -29,33 +39,9 @@ export const products: Product[] = [
       speed: "1.0–2.5 m/s",
       idealFor: "Hospitals & healthcare facilities",
     },
-  },
-  {
-    id: "capsule",
-    slug: "capsule-elevator",
-    name: "Capsule Elevator",
-    category: "Panoramic Glass",
-    shortDescription:
-      "A glass cabin engineered to turn every ride into an architectural moment.",
-    features: ["360° panoramic glass", "LED ambient lighting", "Statement centerpiece design"],
-    specs: {
-      capacity: "8–13 persons · 630–1000 kg",
-      speed: "1.0–1.75 m/s",
-      idealFor: "Lobbies & architectural landmarks",
-    },
-  },
-  {
-    id: "freight",
-    slug: "freight-elevator",
-    name: "Freight Elevator",
-    category: "Heavy Load Transit",
-    shortDescription:
-      "Engineered for maximum payload, continuous cycles, and industrial durability.",
-    features: ["High load capacity", "Reinforced steel cabin", "Continuous-duty motors"],
-    specs: {
-      capacity: "Up to 5000 kg",
-      speed: "0.5–1.0 m/s",
-      idealFor: "Warehouses & industrial facilities",
+    image: {
+      src: oasis("hospital-1"),
+      alt: "Hospital attendant wheeling a bed into a stainless steel hospital elevator",
     },
   },
   {
@@ -71,6 +57,10 @@ export const products: Product[] = [
       speed: "0.15–0.3 m/s",
       idealFor: "Private residences & villas",
     },
+    image: {
+      src: oasis("home-1"),
+      alt: "Compact glass-cabin home elevator installed beside a wooden staircase",
+    },
   },
   {
     id: "mrl",
@@ -85,6 +75,10 @@ export const products: Product[] = [
       speed: "1.0–1.75 m/s",
       idealFor: "Space-constrained buildings",
     },
+    image: {
+      src: oasis("mrl-1"),
+      alt: "Compact machine-room-less gearless traction machine mounted in the shaft head",
+    },
   },
   {
     id: "hydraulic",
@@ -98,6 +92,10 @@ export const products: Product[] = [
       capacity: "6–10 persons · 450–800 kg",
       speed: "0.5–1.0 m/s",
       idealFor: "Low-rise buildings up to 6 floors",
+    },
+    image: {
+      src: oasis("hydraulic-1"),
+      alt: "Cylindrical glass hydraulic elevator cabin on a steel frame",
     },
   },
 ];

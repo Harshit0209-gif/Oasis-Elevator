@@ -31,10 +31,4 @@ export const faqs: Faq[] = [
     answer:
       "Our Platinum plan includes 24×7 emergency response with a 4-hour on-site guarantee. Gold and Silver plans include extended and business-hours support respectively.",
   },
-  {
-    id: "certifications",
-    question: "Are your elevators compliant with international safety standards?",
-    answer:
-      "All Oasis elevators are engineered to meet ISO, CE, and EN 81-20 safety standards, and are certified under the Bureau of Indian Standards.",
-  },
 ];

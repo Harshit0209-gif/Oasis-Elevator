@@ -12,13 +12,13 @@ export function ProductsPage() {
     <>
       <Seo
         title="Products"
-        description="Seven engineered elevator systems, each built for the space it will serve."
+        description="Five engineered elevator systems, each built for the space it will serve."
         path="/products"
       />
       <PageHero
         eyebrow="Products"
         title="The Oasis collection."
-        description="From residential comfort to industrial-grade freight — seven systems, each engineered with intent."
+        description="From residential comfort to critical-care mobility — five systems, each engineered with intent."
       />
 
       <section className="bg-bg-primary py-24">

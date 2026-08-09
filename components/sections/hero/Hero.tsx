@@ -60,7 +60,7 @@ export function Hero() {
           className="mt-8 flex flex-wrap items-center gap-4"
         >
           <Button size="xl" asChild>
-            <Link to="/solutions">Explore Solutions</Link>
+            <Link to="/services">Explore Services</Link>
           </Button>
           <Button variant="outline-light" size="xl" asChild>
             <Link to="/contact">Get Consultation</Link>

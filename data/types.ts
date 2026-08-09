@@ -38,6 +38,7 @@ export interface Product {
   shortDescription: string;
   features: string[];
   specs: ProductSpecs;
+  image: ImageAsset;
 }
 
 export interface Accessory {
@@ -95,22 +96,18 @@ export interface MaintenancePlan {
   recommended?: boolean;
 }
 
-export interface Certification {
-  id: string;
-  name: string;
-  abbreviation: string;
-}
-
 export interface Faq {
   id: string;
   question: string;
   answer: string;
 }
 
-export interface Solution {
+export interface Service {
   id: string;
   title: string;
   description: string;
+  features?: string[];
+  image: ImageAsset;
 }
 
 export interface CompanyInfo {
