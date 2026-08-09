@@ -21,7 +21,7 @@ export function Logo({ variant = "plain", className, imgClassName, priority }: L
       to="/"
       aria-label="Oasis Elevators — home"
       className={cn(
-        "inline-flex items-center rounded-lg transition-opacity hover:opacity-90",
+        "inline-flex w-fit shrink-0 self-start items-center rounded-lg transition-opacity hover:opacity-90",
         variant === "chip" && "bg-white/95 px-3 py-1.5 shadow-[0_1px_0_rgba(0,0,0,0.04)]",
         className,
       )}

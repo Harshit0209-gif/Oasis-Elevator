@@ -1,4 +1,5 @@
 import { useEffect, useRef, type PointerEvent as ReactPointerEvent, type ReactNode } from "react";
+import { useMediaQuery } from "@/hooks/use-media-query";
 import { useReducedMotion } from "@/lib/use-reduced-motion";
 import { cn } from "@/lib/utils";
 
@@ -35,6 +36,12 @@ export function AutoScrollMarquee({
   // ourselves and only for mouse pointers (touch keeps using native panning).
   const dragRef = useRef<{ startX: number; startScrollLeft: number } | null>(null);
   const reducedMotion = useReducedMotion();
+  // Touch devices synthesize a "mouseenter" on tap with no matching
+  // "mouseleave" — wiring pause-on-hover unconditionally would let the very
+  // first tap pause the drift forever with nothing to ever resume it. Only
+  // real pointer devices get the hover-to-pause nicety; touch already gets
+  // pause-while-touching from the pointer handlers below.
+  const canHover = useMediaQuery("(hover: hover)");
 
   useEffect(() => {
     // Reduced motion: skip the imposed auto-drift entirely, but the element
@@ -119,8 +126,8 @@ export function AutoScrollMarquee({
         onPointerMove={handlePointerMove}
         onPointerUp={endDrag}
         onPointerCancel={endDrag}
-        onMouseEnter={pause}
-        onMouseLeave={scheduleResume}
+        onMouseEnter={canHover ? pause : undefined}
+        onMouseLeave={canHover ? scheduleResume : undefined}
         onWheel={() => {
           pause();
           scheduleResume();
