@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import { MotionConfig } from "framer-motion";
 import { SmoothScrollProvider } from "@/components/layout/SmoothScrollProvider";
 import { LoadingScreen } from "@/components/layout/LoadingScreen";
+import { RouteTransitionLoader } from "@/components/layout/RouteTransitionLoader";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { OrganizationJsonLd } from "@/lib/seo";
@@ -22,6 +23,7 @@ export default function App() {
       <SmoothScrollProvider>
         <ScrollToTop />
         <LoadingScreen />
+        <RouteTransitionLoader />
         <Navbar />
         <main className="flex-1">
           <Routes>

@@ -4,7 +4,7 @@ import { useReducedMotion } from "@/lib/use-reduced-motion";
 
 const SESSION_KEY = "oasis-loaded";
 const MAX_DURATION_MS = 2000;
-const LINE_DURATION_MS = 1200;
+const MIN_VISIBLE_MS = 1200;
 
 function noopSubscribe() {
   return () => {};
@@ -31,7 +31,7 @@ export function LoadingScreen() {
     if (skip) return;
     sessionStorage.setItem(SESSION_KEY, "1");
 
-    const dismiss = window.setTimeout(() => setVisible(false), LINE_DURATION_MS + 300);
+    const dismiss = window.setTimeout(() => setVisible(false), MIN_VISIBLE_MS + 300);
     const hardCap = window.setTimeout(() => setVisible(false), MAX_DURATION_MS);
 
     return () => {
@@ -64,14 +64,12 @@ export function LoadingScreen() {
               className="h-10 w-auto"
             />
           </motion.div>
-          <div className="h-px w-40 overflow-hidden bg-hairline">
-            <motion.div
-              className="h-full bg-brand-blue"
-              initial={{ width: "0%" }}
-              animate={{ width: "100%" }}
-              transition={{ duration: LINE_DURATION_MS / 1000, ease: [0.16, 1, 0.3, 1] }}
-            />
-          </div>
+          <img
+            src="/oasis_elevators_gear_loader_vector.svg"
+            alt="Loading"
+            fetchPriority="high"
+            className="size-28"
+          />
         </motion.div>
       )}
     </AnimatePresence>

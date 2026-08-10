@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 240 240" width="240" height="240"
+  role="img" aria-label="Oasis Elevators rotating gear loader">
+
+  <title>Oasis Elevators Rotating Gear Loader</title>
+
+  <defs>
+    <!-- The complete cog ring -->
+    <path id="gearRing"
+      d="M 120,120
+         M 105.48,39.30 111.55,19.35 128.45,19.35 134.52,39.30 147.78,42.85 163.00,28.61 177.64,37.06 172.93,57.37 182.63,67.07 202.94,62.36 211.39,77.00 197.15,92.22 200.70,105.48 220.65,111.55 220.65,128.45 200.70,134.52 197.15,147.78 211.39,163.00 202.94,177.64 182.63,172.93 172.93,182.63 177.64,202.94 163.00,211.39 147.78,197.15 134.52,200.70 128.45,220.65 111.55,220.65 105.48,200.70 92.22,197.15 77.00,211.39 62.36,202.94 67.07,182.63 57.37,172.93 37.06,177.64 28.61,163.00 42.85,147.78 39.30,134.52 19.35,128.45 19.35,111.55 39.30,105.48 42.85,92.22 28.61,77.00 37.06,62.36 57.37,67.07 67.07,57.37 62.36,37.06 77.00,28.61 92.22,42.85
+         M 69,120
+         A 51,51 0 1,0 171,120
+         A 51,51 0 1,0 69,120"
+      fill-rule="evenodd"/>
+
+    <!-- Diagonal split: deliberately overlapping so neither half can disappear -->
+    <clipPath id="upperClip">
+      <polygon points="0,0 240,0 240,116 0,74"/>
+    </clipPath>
+
+    <clipPath id="lowerClip">
+      <polygon points="0,74 240,116 240,240 0,240"/>
+    </clipPath>
+
+    <!-- Central negative-space motif -->
+    <clipPath id="centerClip">
+      <circle cx="120" cy="120" r="51"/>
+    </clipPath>
+  </defs>
+
+  <g id="oasis-loader">
+
+    <!-- Upper half -->
+    <g clip-path="url(#upperClip)">
+      <use href="#gearRing" fill="#0C6584"/>
+    </g>
+
+    <!-- Lower half -->
+    <g clip-path="url(#lowerClip)">
+      <use href="#gearRing" fill="#11215C"/>
+    </g>
+
+    <!-- Clean diagonal separation -->
+    <polygon points="20,84 220,122 220,132 20,94"
+             fill="#F8F8F6"/>
+
+    <!-- Inner dynamic curved detail -->
+    <path d="M 72 105
+             A 51 51 0 0 1 171 120
+             L 88 104 Z"
+          fill="#F8F8F6"/>
+
+    <path d="M 72 135
+             A 51 51 0 0 0 171 120
+             L 88 136 Z"
+          fill="#F8F8F6"/>
+
+  </g>
+
+  <style>
+    #oasis-loader {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: oasisRotate 2.4s linear infinite;
+    }
+
+    @keyframes oasisRotate {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+  </style>
+</svg>

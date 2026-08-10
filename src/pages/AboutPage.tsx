@@ -69,6 +69,17 @@ export function AboutPage() {
             </p>
           </RevealOnScroll>
         </div>
+
+        <RevealOnScroll delay={0.15} className="container-oasis mt-16">
+          <div className="mx-auto max-w-3xl overflow-hidden rounded-2xl border border-hairline bg-bg-secondary p-6 shadow-sm md:p-10">
+            <img
+              src="/images/oasis.png"
+              alt="Exploded-view diagram of an elevator system — machine, guide rails, cabin, buffer and counterweight — alongside plan view, hoistway elevation and specification table"
+              className="w-full"
+              loading="lazy"
+            />
+          </div>
+        </RevealOnScroll>
       </section>
 
       <section className="border-t border-hairline bg-surface py-24">
