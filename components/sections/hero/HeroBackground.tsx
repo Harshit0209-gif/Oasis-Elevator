@@ -1,12 +1,18 @@
 import { useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
-const HERO_IMAGE =
+const FALLBACK_IMAGE =
   "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=85&w=2400&auto=format&fit=crop";
 
-export function HeroBackground() {
+interface HeroBackgroundProps {
+  image?: { src: string; alt: string };
+}
+
+export function HeroBackground({ image }: HeroBackgroundProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [imageFailed, setImageFailed] = useState(false);
+  const src = image?.src || FALLBACK_IMAGE;
+  const alt = image?.alt || "Low-angle view of premium glass skyscrapers reaching into the sky";
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
@@ -31,8 +37,8 @@ export function HeroBackground() {
             className="absolute inset-0"
           >
             <img
-              src={HERO_IMAGE}
-              alt="Low-angle view of premium glass skyscrapers reaching into the sky"
+              src={src}
+              alt={alt}
               loading="eager"
               fetchPriority="high"
               className="absolute inset-0 h-full w-full object-cover"

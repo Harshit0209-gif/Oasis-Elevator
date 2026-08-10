@@ -1,14 +1,13 @@
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
-import { processSteps } from "@/data/process-steps";
+import { getProcessSteps } from "@/lib/content";
+import { useContent } from "@/hooks/use-content";
 import { SectionHeading } from "@/components/shared/SectionHeading";
+import { SectionLoader } from "@/components/shared/SectionLoader";
 import { ensureGsapRegistered, ScrollTrigger } from "@/lib/gsap";
 import { useReducedMotion } from "@/lib/use-reduced-motion";
 import { ShaftColumn } from "./ShaftColumn";
 import { FloorContent } from "./FloorContent";
-
-const steps = [...processSteps].sort((a, b) => a.order - b.order);
-const total = steps.length;
 
 // Scroll distance per floor, as a percentage of one viewport height. 100
 // would mean "scroll a full screen to advance one floor" — dropping to 65
@@ -22,7 +21,16 @@ const SCROLL_PER_FLOOR = 65;
 // shaft sits sticky on the left, the content track slides past it on the
 // right, both driven by the same scroll-progress value. No separate mobile
 // concept: only the shaft column's share of the width changes.
+//
+// Floor count is entirely CMS-driven (via getProcessSteps) — every
+// measurement below (`total`, scroll distance, translateY math, active-floor
+// detection) is computed from `steps.length`, not a fixed number, so adding
+// or removing a step in the admin needs zero changes here.
 export function ProcessShaft() {
+  const { data: processSteps, loading } = useContent(getProcessSteps);
+  const steps = [...(processSteps ?? [])].sort((a, b) => a.order - b.order);
+  const total = steps.length;
+
   const rootRef = useRef<HTMLDivElement>(null);
   const driverRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
@@ -35,7 +43,7 @@ export function ProcessShaft() {
 
   useGSAP(
     () => {
-      if (reducedMotion) return;
+      if (reducedMotion || total === 0) return;
 
       ensureGsapRegistered();
       const driver = driverRef.current;
@@ -74,7 +82,7 @@ export function ProcessShaft() {
 
       return () => trigger.kill();
     },
-    { scope: rootRef, dependencies: [reducedMotion] },
+    { scope: rootRef, dependencies: [reducedMotion, total] },
   );
 
   return (
@@ -93,13 +101,15 @@ export function ProcessShaft() {
       <div className="container-oasis relative pt-24 md:pt-32">
         <SectionHeading
           eyebrow="Our Process"
-          title="Seven floors to every project."
+          title="Every floor of the journey."
           description="Scroll to follow a project's journey from first consultation to lifetime maintenance."
           align="center"
         />
       </div>
 
-      {reducedMotion ? (
+      {loading ? (
+        <SectionLoader />
+      ) : total === 0 ? null : reducedMotion ? (
         <div className="container-oasis flex flex-col gap-10 py-16 md:flex-row md:gap-16">
           <div className="sticky top-20 flex h-[55svh] w-full max-w-[220px] self-start md:top-24 md:h-[60svh] md:w-[26%]">
             <ShaftColumn

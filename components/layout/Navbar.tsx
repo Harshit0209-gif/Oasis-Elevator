@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useLocation, Link } from "react-router-dom";
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
-import { navLinks } from "@/data/nav";
+import { getNavigation } from "@/lib/content";
+import { useContent } from "@/hooks/use-content";
 import { Logo } from "@/components/shared/Logo";
 import { AnimatedUnderlineLink } from "@/components/shared/AnimatedUnderlineLink";
 import { Button } from "@/components/ui/button";
@@ -23,6 +24,7 @@ export function Navbar() {
   // scrolling.
   const isHome = pathname === "/";
   const overDark = isHome && !scrolled;
+  const { data: navLinks } = useContent(getNavigation);
 
   return (
     <motion.header
@@ -43,7 +45,7 @@ export function Navbar() {
         <Logo priority variant={overDark ? "chip" : "plain"} />
 
         <nav className="hidden items-center gap-8 lg:flex">
-          {navLinks.map((link) => (
+          {(navLinks ?? []).map((link) => (
             <AnimatedUnderlineLink
               key={link.href}
               href={link.href}

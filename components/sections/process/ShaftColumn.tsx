@@ -57,7 +57,7 @@ export function ShaftColumn({ steps, carRef, fillRef, floorRef, tickRefs, total 
             data-passed="false"
             aria-hidden
             className="absolute left-1/2 h-px w-5 -translate-x-1/2 -translate-y-1/2 bg-[#c7ccd1] transition-colors duration-300 data-[passed=true]:bg-brand-blue"
-            style={{ top: `${100 - (index / (total - 1)) * 100}%` }}
+            style={{ top: `${total > 1 ? 100 - (index / (total - 1)) * 100 : 100}%` }}
           />
         ))}
 

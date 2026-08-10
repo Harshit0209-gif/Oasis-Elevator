@@ -1,4 +1,5 @@
 import { Seo } from "@/lib/seo";
+import { useSeo } from "@/hooks/use-seo";
 import { Hero } from "@/components/sections/hero/Hero";
 import { TrustIndicators } from "@/components/sections/trust-indicators/TrustIndicators";
 import { IndustriesShowcase } from "@/components/sections/industries/IndustriesShowcase";
@@ -10,9 +11,15 @@ import { FaqSection } from "@/components/sections/faq/FaqSection";
 import { ContactSection } from "@/components/sections/contact/ContactSection";
 
 export function HomePage() {
+  const seo = useSeo(
+    "home",
+    "Premium Elevators Engineered for Architectural Excellence",
+    "Premium elevators engineered for residential, commercial, healthcare, hospitality and industrial projects across India.",
+  );
+
   return (
     <>
-      <Seo title="Premium Elevators Engineered for Architectural Excellence" path="/" />
+      <Seo title={seo.title} description={seo.description} path="/" />
       <Hero />
       <TrustIndicators />
       <IndustriesShowcase />

@@ -1,4 +1,5 @@
-import { companyInfo } from "@/data/company";
+import { getSiteSettings } from "./content";
+import { useContent } from "@/hooks/use-content";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "./constants";
 
 interface SeoProps {
@@ -36,45 +37,50 @@ export function Seo({ title, description, path = "" }: SeoProps) {
 }
 
 export function OrganizationJsonLd() {
+  const { data: settings } = useContent(getSiteSettings);
+  if (!settings) return null;
+
   const json = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: companyInfo.legalName,
+    name: settings.legalName,
     url: SITE_URL,
     logo: `${SITE_URL}/logo/oasis-logo.png`,
-    slogan: companyInfo.tagline,
     contactPoint: {
       "@type": "ContactPoint",
-      telephone: companyInfo.phone,
+      telephone: settings.phone,
       contactType: "customer service",
-      email: companyInfo.email,
+      email: settings.email,
     },
-    sameAs: Object.values(companyInfo.socials),
+    sameAs: Object.values(settings.socials).filter(Boolean),
   };
 
   return <script type="application/ld+json">{JSON.stringify(json)}</script>;
 }
 
 export function LocalBusinessJsonLd() {
+  const { data: settings } = useContent(getSiteSettings);
+  if (!settings) return null;
+
   const json = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    name: companyInfo.legalName,
+    name: settings.legalName,
     image: `${SITE_URL}/og-image.jpg`,
-    telephone: companyInfo.phone,
-    email: companyInfo.email,
+    telephone: settings.phone,
+    email: settings.email,
     address: {
       "@type": "PostalAddress",
-      streetAddress: `${companyInfo.address.line1}, ${companyInfo.address.line2}`,
-      addressLocality: companyInfo.address.city,
-      addressRegion: companyInfo.address.state,
-      postalCode: companyInfo.address.postalCode,
-      addressCountry: companyInfo.address.country,
+      streetAddress: `${settings.address.line1}, ${settings.address.line2}`,
+      addressLocality: settings.address.city,
+      addressRegion: settings.address.state,
+      postalCode: settings.address.postalCode,
+      addressCountry: settings.address.country,
     },
     geo: {
       "@type": "GeoCoordinates",
-      latitude: companyInfo.geo.lat,
-      longitude: companyInfo.geo.lng,
+      latitude: settings.geo.lat,
+      longitude: settings.geo.lng,
     },
     url: SITE_URL,
   };

@@ -4,7 +4,15 @@ import { cn } from "@/lib/utils";
 
 // Desktop-only (rendered inside a `hidden lg:block` wrapper) — touch devices
 // get IndustryMobileGallery instead, since this relies on hover to expand.
-export function IndustryCard({ industry, index }: { industry: Industry; index: number }) {
+export function IndustryCard({
+  industry,
+  index,
+  isLast,
+}: {
+  industry: Industry;
+  index: number;
+  isLast?: boolean;
+}) {
   return (
     <div
       tabIndex={0}
@@ -12,7 +20,7 @@ export function IndustryCard({ industry, index }: { industry: Industry; index: n
         "group/card relative h-[560px] flex-1 overflow-hidden border-r border-hairline outline-none",
         "transition-[flex-grow] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]",
         "hover:flex-[3] focus-visible:flex-[3]",
-        index === 7 && "border-r-0",
+        isLast && "border-r-0",
       )}
     >
       <OptimizedImage

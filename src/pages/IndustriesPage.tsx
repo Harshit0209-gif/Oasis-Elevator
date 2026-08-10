@@ -1,17 +1,23 @@
 import { Seo } from "@/lib/seo";
-import { industries } from "@/data/industries";
+import { getIndustries } from "@/lib/content";
+import { useContent } from "@/hooks/use-content";
+import { useSeo } from "@/hooks/use-seo";
 import { PageHero } from "@/components/shared/PageHero";
 import { CtaBand } from "@/components/shared/CtaBand";
+import { SectionLoader } from "@/components/shared/SectionLoader";
 import { IndustryListCard } from "@/components/sections/industries/IndustryListCard";
 
 export function IndustriesPage() {
+  const { data: industries, loading } = useContent(getIndustries);
+  const seo = useSeo(
+    "industries",
+    "Industries",
+    "Engineered mobility for residential, commercial, healthcare and industrial buildings.",
+  );
+
   return (
     <>
-      <Seo
-        title="Industries"
-        description="Engineered mobility for residential, commercial, healthcare and industrial buildings."
-        path="/industries"
-      />
+      <Seo title={seo.title} description={seo.description} path="/industries" />
       <PageHero
         eyebrow="Industries"
         title="Built for every vertical."
@@ -19,11 +25,15 @@ export function IndustriesPage() {
       />
 
       <section className="bg-bg-primary py-24">
-        <div className="container-oasis grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {industries.map((industry) => (
-            <IndustryListCard key={industry.id} industry={industry} />
-          ))}
-        </div>
+        {loading || !industries ? (
+          <SectionLoader />
+        ) : (
+          <div className="container-oasis grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {industries.map((industry) => (
+              <IndustryListCard key={industry.id} industry={industry} />
+            ))}
+          </div>
+        )}
       </section>
 
       <CtaBand

@@ -1,8 +1,15 @@
-import { stats } from "@/data/stats";
+import { getStatistics } from "@/lib/content";
+import { useContent } from "@/hooks/use-content";
 import { RevealOnScroll } from "@/components/shared/RevealOnScroll";
+import { SectionLoader } from "@/components/shared/SectionLoader";
 import { AnimatedCounter } from "./AnimatedCounter";
 
 export function TrustIndicators() {
+  const { data: stats, loading } = useContent(getStatistics);
+
+  if (loading) return <SectionLoader />;
+  if (!stats || stats.length === 0) return null;
+
   return (
     <section className="border-y border-hairline bg-bg-secondary">
       <div className="container-oasis grid grid-cols-1 divide-y divide-hairline py-14 sm:grid-cols-3 sm:divide-x sm:divide-y-0">

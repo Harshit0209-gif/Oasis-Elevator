@@ -1,11 +1,21 @@
 import { ExternalLink, MapPin } from "lucide-react";
-import { companyInfo } from "@/data/company";
+import { getSiteSettings } from "@/lib/content";
+import { useContent } from "@/hooks/use-content";
+import { SectionLoader } from "@/components/shared/SectionLoader";
 
 export function OfficeMap() {
-  const { lat, lng } = companyInfo.geo;
+  const { data: settings, loading } = useContent(getSiteSettings);
   const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY as string | undefined;
-  // Deep-links straight into the Google Maps app on mobile, or a new tab on
-  // desktop — same coordinates as the embed below, so the pin matches.
+
+  if (loading || !settings) {
+    return (
+      <div className="flex h-full min-h-[320px] items-center justify-center rounded-2xl border border-hairline bg-bg-secondary">
+        <SectionLoader className="py-0" />
+      </div>
+    );
+  }
+
+  const { lat, lng } = settings.geo;
   const directionsUrl = `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`;
 
   // No key configured (VITE_GOOGLE_MAPS_API_KEY unset) — fail gracefully

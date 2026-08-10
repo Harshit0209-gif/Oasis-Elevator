@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Menu } from "lucide-react";
-import { navLinks } from "@/data/nav";
+import { getNavigation } from "@/lib/content";
+import { useContent } from "@/hooks/use-content";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -15,6 +16,7 @@ import { cn } from "@/lib/utils";
 
 export function MobileMenu({ scrolled = false }: { scrolled?: boolean }) {
   const [open, setOpen] = useState(false);
+  const { data: navLinks } = useContent(getNavigation);
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
@@ -34,7 +36,7 @@ export function MobileMenu({ scrolled = false }: { scrolled?: boolean }) {
           <Logo />
 
           <nav className="mt-12 flex flex-col gap-1">
-            {navLinks.map((link) => (
+            {(navLinks ?? []).map((link) => (
               <SheetClose asChild key={link.href}>
                 <Link
                   to={link.href}

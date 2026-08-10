@@ -22,12 +22,7 @@ export interface Industry {
   name: string;
   description: string;
   image: ImageAsset;
-}
-
-export interface ProductSpecs {
-  capacity: string;
-  speed: string;
-  idealFor: string;
+  icon?: string;
 }
 
 export interface Product {
@@ -37,7 +32,7 @@ export interface Product {
   category: string;
   shortDescription: string;
   features: string[];
-  specs: ProductSpecs;
+  idealFor: string;
   image: ImageAsset;
 }
 
@@ -62,6 +57,7 @@ export interface ProcessStep {
   order: number;
   title: string;
   description: string;
+  icon?: string;
 }
 
 export interface WhyOasisFeature {
@@ -78,24 +74,6 @@ export interface Client {
   name: string;
 }
 
-export interface Testimonial {
-  id: string;
-  quote: string;
-  clientName: string;
-  clientTitle: string;
-  company: string;
-  photo: ImageAsset;
-}
-
-export interface MaintenancePlan {
-  id: string;
-  tier: "Silver" | "Gold" | "Platinum";
-  tagline: string;
-  responseTime: string;
-  features: string[];
-  recommended?: boolean;
-}
-
 export interface Faq {
   id: string;
   question: string;
@@ -108,6 +86,7 @@ export interface Service {
   description: string;
   features?: string[];
   image: ImageAsset;
+  icon?: string;
 }
 
 export interface CompanyInfo {
@@ -128,7 +107,6 @@ export interface CompanyInfo {
     lat: number;
     lng: number;
   };
-  hours: string;
   socials: {
     facebook: string;
     linkedin: string;

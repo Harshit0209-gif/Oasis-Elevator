@@ -1,32 +1,42 @@
 import { Seo } from "@/lib/seo";
-import { products } from "@/data/products";
+import { getProducts } from "@/lib/content";
+import { useContent } from "@/hooks/use-content";
+import { useSeo } from "@/hooks/use-seo";
 import { accessories } from "@/data/accessories";
 import { PageHero } from "@/components/shared/PageHero";
 import { CtaBand } from "@/components/shared/CtaBand";
 import { SectionHeading } from "@/components/shared/SectionHeading";
+import { SectionLoader } from "@/components/shared/SectionLoader";
 import { ProductListCard } from "@/components/sections/product-collection/ProductListCard";
 import { AccessoryCard } from "@/components/sections/product-collection/AccessoryCard";
 
 export function ProductsPage() {
+  const { data: products, loading } = useContent(getProducts);
+  const seo = useSeo(
+    "products",
+    "Products",
+    "Engineered elevator systems, each built for the space it will serve.",
+  );
+
   return (
     <>
-      <Seo
-        title="Products"
-        description="Five engineered elevator systems, each built for the space it will serve."
-        path="/products"
-      />
+      <Seo title={seo.title} description={seo.description} path="/products" />
       <PageHero
         eyebrow="Products"
         title="The Oasis collection."
-        description="From residential comfort to critical-care mobility — five systems, each engineered with intent."
+        description="From residential comfort to critical-care mobility — every system engineered with intent."
       />
 
       <section className="bg-bg-primary py-24">
-        <div className="container-oasis grid grid-cols-1 gap-x-10 gap-y-16 md:grid-cols-2 lg:grid-cols-3">
-          {products.map((product) => (
-            <ProductListCard key={product.id} product={product} />
-          ))}
-        </div>
+        {loading || !products ? (
+          <SectionLoader />
+        ) : (
+          <div className="container-oasis grid grid-cols-1 gap-x-10 gap-y-16 md:grid-cols-2 lg:grid-cols-3">
+            {products.map((product) => (
+              <ProductListCard key={product.id} product={product} />
+            ))}
+          </div>
+        )}
       </section>
 
       <section className="border-t border-hairline bg-surface py-24">

@@ -1,6 +1,6 @@
 import { forwardRef, type CSSProperties } from "react";
 import type { ProcessStep } from "@/data/types";
-import { processStepIcons } from "./process-icons";
+import { resolveProcessIcon } from "./process-icons";
 
 interface FloorContentProps {
   step: ProcessStep;
@@ -16,7 +16,7 @@ interface FloorContentProps {
 // active floor reads at full strength, passed floors dim, upcoming floors
 // stay subtle — same hierarchy at every viewport width.
 export const FloorContent = forwardRef<HTMLDivElement, FloorContentProps>(({ step, style }, ref) => {
-  const Icon = processStepIcons[step.id];
+  const Icon = resolveProcessIcon(step.icon);
 
   return (
     <div
