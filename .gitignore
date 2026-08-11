@@ -31,3 +31,15 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
+
+# editors
+.vscode/*
+!.vscode/extensions.json
+.idea
+
+# OS
+Thumbs.db
+
+# local reference/scratch media (screen recordings etc. dropped in repo root)
+*.mp4
+*.mov
