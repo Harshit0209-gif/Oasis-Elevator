@@ -8,7 +8,7 @@ import { ProcessShaft } from "@/components/sections/process/ProcessShaft";
 import { ClientsMarquee } from "@/components/sections/clients/ClientsMarquee";
 import { Testimonials } from "@/components/sections/testimonials/Testimonials";
 import { FaqSection } from "@/components/sections/faq/FaqSection";
-import { ContactSection } from "@/components/sections/contact/ContactSection";
+import { CtaBand } from "@/components/shared/CtaBand";
 
 export function HomePage() {
   const seo = useSeo(
@@ -28,7 +28,10 @@ export function HomePage() {
       <ClientsMarquee />
       <Testimonials />
       <FaqSection />
-      <ContactSection />
+      <CtaBand
+        title="Ready to engineer your next project?"
+        description="Tell us about your building and requirements — our team responds within one business day."
+      />
     </>
   );
 }

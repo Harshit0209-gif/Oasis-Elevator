@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 const contactSchema = z.object({
   name: z.string().min(2, "Please enter your full name."),
@@ -21,7 +22,7 @@ type ContactFormValues = z.infer<typeof contactSchema>;
 const fieldClassName =
   "h-12 rounded-none border-0 border-b border-hairline bg-transparent px-0 text-base text-foreground placeholder:text-graphite/70 focus-visible:border-brand-blue focus-visible:ring-0";
 
-export function ContactForm() {
+export function ContactForm({ compact = false }: { compact?: boolean }) {
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
 
   const {
@@ -56,13 +57,18 @@ export function ContactForm() {
 
   if (status === "success") {
     return (
-      <div className="flex flex-col items-center gap-4 rounded-2xl border border-hairline bg-bg-secondary p-12 text-center">
-        <CheckCircle2 className="size-10 text-brand-blue" />
+      <div
+        className={cn(
+          "flex flex-col items-center gap-4 rounded-2xl border border-hairline bg-bg-secondary text-center",
+          compact ? "gap-3 p-6" : "p-12",
+        )}
+      >
+        <CheckCircle2 className={cn("text-brand-blue", compact ? "size-8" : "size-10")} />
         <h3 className="font-heading text-xl font-medium">Request received.</h3>
         <p className="max-w-sm text-sm text-graphite">
           Thank you — our engineering team will reach out within one business day.
         </p>
-        <Button variant="outline" onClick={() => setStatus("idle")}>
+        <Button variant="outline" size={compact ? "sm" : "default"} onClick={() => setStatus("idle")}>
           Send another request
         </Button>
       </div>
@@ -70,8 +76,8 @@ export function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-8" noValidate>
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+    <form onSubmit={handleSubmit(onSubmit)} className={cn("flex flex-col", compact ? "gap-5" : "gap-8")} noValidate>
+      <div className={cn("grid grid-cols-1 gap-6", !compact && "md:grid-cols-2")}>
         <div className="flex flex-col gap-2">
           <Label htmlFor="name" className="text-xs uppercase tracking-[0.15em] text-graphite">
             Full Name

@@ -1,7 +1,9 @@
 import { getNavigation, getSiteSettings, getProducts, getFooterSection } from "@/lib/content";
 import { useContent } from "@/hooks/use-content";
+import { useContactModal } from "@/lib/contact-modal-context";
 import { Logo } from "@/components/shared/Logo";
 import { AnimatedUnderlineLink } from "@/components/shared/AnimatedUnderlineLink";
+import { Button } from "@/components/ui/button";
 import { FacebookIcon, InstagramIcon, LinkedInIcon } from "@/components/shared/SocialIcons";
 
 export function Footer() {
@@ -10,6 +12,7 @@ export function Footer() {
   const { data: settings } = useContent(getSiteSettings);
   const { data: products } = useContent(getProducts);
   const { data: footerSection } = useContent(getFooterSection);
+  const { open: openContactModal } = useContactModal();
 
   return (
     <footer className="bg-navy">
@@ -103,6 +106,9 @@ export function Footer() {
               </li>
             </ul>
           )}
+          <Button variant="outline-light" size="sm" onClick={openContactModal} className="w-fit">
+            Request a Consultation
+          </Button>
         </div>
       </div>
 

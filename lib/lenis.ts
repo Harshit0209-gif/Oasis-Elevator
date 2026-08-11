@@ -10,6 +10,15 @@ export function createLenis() {
     wheelMultiplier: 1,
     touchMultiplier: 1.2,
     syncTouch: false,
+    // Lenis's default resize target is document.documentElement, but <html>'s
+    // own layout box is pinned to the viewport — its ResizeObserver never
+    // fires when child content (e.g. CMS sections that finish an async fetch
+    // after mount) grows the page's actual scrollHeight. That leaves Lenis's
+    // scroll limit stuck at whatever height the page happened to be at
+    // mount time, capping wheel-driven scroll partway down the page even
+    // though the document is genuinely taller. document.body's box does
+    // grow with its content, so ResizeObserver reports it correctly.
+    content: document.body,
   });
   return activeLenis;
 }

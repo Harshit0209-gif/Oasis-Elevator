@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { getHero } from "@/lib/content";
 import { useContent } from "@/hooks/use-content";
+import { useContactModal } from "@/lib/contact-modal-context";
 import { Button } from "@/components/ui/button";
 import { premiumEase } from "@/lib/motion";
 import { HeroBackground } from "./HeroBackground";
@@ -9,6 +10,7 @@ import { ScrollIndicator } from "./ScrollIndicator";
 
 export function Hero() {
   const { data: hero } = useContent(getHero);
+  const { open: openContactModal } = useContactModal();
 
   return (
     <section className="relative flex min-h-[100svh] items-end bg-navy">
@@ -67,9 +69,15 @@ export function Hero() {
               <Button size="xl" asChild>
                 <Link to={hero.primaryCtaLink}>{hero.primaryCtaText}</Link>
               </Button>
-              <Button variant="outline-light" size="xl" asChild>
-                <Link to={hero.secondaryCtaLink}>{hero.secondaryCtaText}</Link>
-              </Button>
+              {hero.secondaryCtaLink === "/contact" ? (
+                <Button variant="outline-light" size="xl" onClick={openContactModal}>
+                  {hero.secondaryCtaText}
+                </Button>
+              ) : (
+                <Button variant="outline-light" size="xl" asChild>
+                  <Link to={hero.secondaryCtaLink}>{hero.secondaryCtaText}</Link>
+                </Button>
+              )}
             </motion.div>
           </>
         )}

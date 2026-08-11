@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { useLocation, Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { getNavigation } from "@/lib/content";
 import { useContent } from "@/hooks/use-content";
+import { useContactModal } from "@/lib/contact-modal-context";
 import { Logo } from "@/components/shared/Logo";
 import { AnimatedUnderlineLink } from "@/components/shared/AnimatedUnderlineLink";
 import { Button } from "@/components/ui/button";
@@ -25,6 +26,7 @@ export function Navbar() {
   const isHome = pathname === "/";
   const overDark = isHome && !scrolled;
   const { data: navLinks } = useContent(getNavigation);
+  const { open: openContactModal } = useContactModal();
 
   return (
     <motion.header
@@ -62,8 +64,8 @@ export function Navbar() {
         </nav>
 
         <div className="hidden lg:block">
-          <Button size="xl" asChild>
-            <Link to="/contact">Request Quote</Link>
+          <Button size="xl" onClick={openContactModal}>
+            Request Quote
           </Button>
         </div>
 

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Menu } from "lucide-react";
 import { getNavigation } from "@/lib/content";
 import { useContent } from "@/hooks/use-content";
+import { useContactModal } from "@/lib/contact-modal-context";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -17,6 +18,7 @@ import { cn } from "@/lib/utils";
 export function MobileMenu({ scrolled = false }: { scrolled?: boolean }) {
   const [open, setOpen] = useState(false);
   const { data: navLinks } = useContent(getNavigation);
+  const { open: openContactModal } = useContactModal();
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
@@ -50,8 +52,8 @@ export function MobileMenu({ scrolled = false }: { scrolled?: boolean }) {
 
           <div className="mt-auto pt-8">
             <SheetClose asChild>
-              <Button size="xl" className="w-full" asChild>
-                <Link to="/contact">Request Quote</Link>
+              <Button size="xl" className="w-full" onClick={openContactModal}>
+                Request Quote
               </Button>
             </SheetClose>
           </div>

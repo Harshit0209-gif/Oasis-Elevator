@@ -7,6 +7,9 @@ import { RouteTransitionLoader } from "@/components/layout/RouteTransitionLoader
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { OrganizationJsonLd } from "@/lib/seo";
+import { ContactModalProvider } from "@/lib/contact-modal-context";
+import { ContactModal } from "@/components/shared/ContactModal";
+import { ContactPopupCard } from "@/components/shared/ContactPopupCard";
 import { ScrollToTop } from "./ScrollToTop";
 import { HomePage } from "./pages/HomePage";
 import { ServicesPage } from "./pages/ServicesPage";
@@ -24,25 +27,29 @@ const AdminApp = lazy(() => import("./admin/AdminApp").then((m) => ({ default: m
 
 function PublicSite() {
   return (
-    <SmoothScrollProvider>
-      <ScrollToTop />
-      <LoadingScreen />
-      <RouteTransitionLoader />
-      <Navbar />
-      <main className="flex-1">
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/services" element={<ServicesPage />} />
-          <Route path="/products" element={<ProductsPage />} />
-          <Route path="/industries" element={<IndustriesPage />} />
-          <Route path="/clients" element={<ClientsPage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
-      </main>
-      <Footer />
-    </SmoothScrollProvider>
+    <ContactModalProvider>
+      <SmoothScrollProvider>
+        <ScrollToTop />
+        <LoadingScreen />
+        <RouteTransitionLoader />
+        <Navbar />
+        <main className="flex-1">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/services" element={<ServicesPage />} />
+            <Route path="/products" element={<ProductsPage />} />
+            <Route path="/industries" element={<IndustriesPage />} />
+            <Route path="/clients" element={<ClientsPage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </main>
+        <Footer />
+      </SmoothScrollProvider>
+      <ContactModal />
+      <ContactPopupCard />
+    </ContactModalProvider>
   );
 }
 
