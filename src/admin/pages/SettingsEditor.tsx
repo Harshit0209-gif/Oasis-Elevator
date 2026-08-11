@@ -58,7 +58,7 @@ export function SettingsEditor() {
       </Section>
 
       <Section title="Address">
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <Field label="Address line 1">
             <Input value={form.address_line1 ?? ""} onChange={(e) => set("address_line1", e.target.value)} />
           </Field>

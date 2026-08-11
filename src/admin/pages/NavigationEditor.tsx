@@ -53,12 +53,12 @@ export function NavigationEditor() {
 
   return (
     <div className="flex max-w-2xl flex-col gap-6">
-      <div className="flex items-center justify-between">
-        <div>
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div className="min-w-0">
           <h1 className="font-heading text-2xl font-medium text-navy">Navigation</h1>
           <p className="text-sm text-graphite">Drag to reorder the main menu.</p>
         </div>
-        <Button onClick={() => void addItem()}>
+        <Button onClick={() => void addItem()} className="w-fit">
           <Plus className="size-4" /> Add link
         </Button>
       </div>

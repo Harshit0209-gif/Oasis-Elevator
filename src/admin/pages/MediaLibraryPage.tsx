@@ -57,13 +57,13 @@ export function MediaLibraryPage() {
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="flex items-center justify-between">
-        <div>
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div className="min-w-0">
           <h1 className="font-heading text-2xl font-medium text-navy">Media Library</h1>
           <p className="text-sm text-graphite">JPG, PNG or WEBP, up to 8MB.</p>
         </div>
         <div className="flex items-center gap-3">
-          <Input placeholder="Search…" value={search} onChange={(e) => setSearch(e.target.value)} className="w-56" />
+          <Input placeholder="Search…" value={search} onChange={(e) => setSearch(e.target.value)} className="w-full sm:w-56" />
           <input
             ref={fileInputRef}
             type="file"

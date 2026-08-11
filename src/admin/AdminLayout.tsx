@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import {
   LayoutDashboard,
@@ -18,8 +19,11 @@ import {
   Search,
   Settings,
   LogOut,
+  Menu,
 } from "lucide-react";
 import { Logo } from "@/components/shared/Logo";
+import { Button } from "@/components/ui/button";
+import { Sheet, SheetClose, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 import { useAdminAuth } from "./useAdminAuth";
 
@@ -44,37 +48,46 @@ const nav = [
   { to: "/admin/settings", label: "Settings", icon: Settings },
 ];
 
+function NavList({ onNavigate }: { onNavigate?: () => void }) {
+  return (
+    <ul className="flex flex-col gap-0.5">
+      {nav.map((item) => (
+        <li key={item.to}>
+          <NavLink
+            to={item.to}
+            end={item.end}
+            onClick={onNavigate}
+            className={({ isActive }) =>
+              cn(
+                "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
+                isActive
+                  ? "bg-brand-blue text-white"
+                  : "text-white/70 hover:bg-white/5 hover:text-white",
+              )
+            }
+          >
+            <item.icon className="size-4 shrink-0" />
+            {item.label}
+          </NavLink>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 export function AdminLayout() {
   const { profile, signOut } = useAdminAuth();
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
     <div className="flex min-h-screen bg-bg-secondary">
-      <aside className="flex w-64 shrink-0 flex-col border-r border-hairline bg-navy">
+      {/* Desktop sidebar — hidden below lg, replaced by the Sheet drawer below */}
+      <aside className="hidden w-64 shrink-0 flex-col border-r border-hairline bg-navy lg:flex">
         <div className="flex items-center gap-2 border-b border-white/10 px-5 py-5">
           <Logo variant="chip" />
         </div>
         <nav className="flex-1 overflow-y-auto px-3 py-4">
-          <ul className="flex flex-col gap-0.5">
-            {nav.map((item) => (
-              <li key={item.to}>
-                <NavLink
-                  to={item.to}
-                  end={item.end}
-                  className={({ isActive }) =>
-                    cn(
-                      "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
-                      isActive
-                        ? "bg-brand-blue text-white"
-                        : "text-white/70 hover:bg-white/5 hover:text-white",
-                    )
-                  }
-                >
-                  <item.icon className="size-4 shrink-0" />
-                  {item.label}
-                </NavLink>
-              </li>
-            ))}
-          </ul>
+          <NavList />
         </nav>
         <div className="border-t border-white/10 p-3">
           <button
@@ -89,10 +102,45 @@ export function AdminLayout() {
       </aside>
 
       <div className="flex min-w-0 flex-1 flex-col">
-        <header className="flex h-16 shrink-0 items-center justify-end border-b border-hairline bg-white px-6">
-          <span className="text-sm text-graphite">{profile?.name}</span>
+        <header className="flex h-16 shrink-0 items-center justify-between gap-3 border-b border-hairline bg-white px-4 md:px-6">
+          <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
+            <SheetTrigger asChild>
+              <Button variant="outline" size="icon-lg" className="lg:hidden" aria-label="Open menu">
+                <Menu className="size-5" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="left" className="w-full max-w-xs border-hairline bg-navy p-0">
+              <SheetTitle className="sr-only">Admin navigation</SheetTitle>
+              <div className="flex h-full flex-col">
+                <div className="flex items-center gap-2 border-b border-white/10 px-5 py-5">
+                  <Logo variant="chip" />
+                </div>
+                <nav className="flex-1 overflow-y-auto px-3 py-4">
+                  <NavList onNavigate={() => setMobileOpen(false)} />
+                </nav>
+                <div className="border-t border-white/10 p-3">
+                  <SheetClose asChild>
+                    <button
+                      type="button"
+                      onClick={() => void signOut()}
+                      className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-white/70 transition-colors hover:bg-white/5 hover:text-white"
+                    >
+                      <LogOut className="size-4 shrink-0" />
+                      Logout
+                    </button>
+                  </SheetClose>
+                </div>
+              </div>
+            </SheetContent>
+          </Sheet>
+
+          <div className="lg:hidden">
+            <Logo />
+          </div>
+
+          <span className="ml-auto truncate text-sm text-graphite">{profile?.name}</span>
         </header>
-        <main className="flex-1 overflow-y-auto p-8">
+        <main className="min-w-0 flex-1 overflow-y-auto overflow-x-hidden p-4 sm:p-6 lg:p-8">
           <Outlet />
         </main>
       </div>

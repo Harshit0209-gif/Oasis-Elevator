@@ -54,12 +54,12 @@ export function SeoEditor() {
   if (loading) return <Loader2 className="size-6 animate-spin text-brand-blue" />;
 
   return (
-    <div className="flex gap-8">
-      <div className="w-48 shrink-0">
+    <div className="flex flex-col gap-8 lg:flex-row">
+      <div className="lg:w-48 lg:shrink-0">
         <h1 className="mb-4 font-heading text-2xl font-medium text-navy">SEO</h1>
-        <ul className="flex flex-col gap-1">
+        <ul className="flex gap-1 overflow-x-auto lg:flex-col lg:overflow-visible">
           {pages.map((p) => (
-            <li key={p.page_slug}>
+            <li key={p.page_slug} className="shrink-0 lg:shrink">
               <button
                 type="button"
                 onClick={() => selectPage(p.page_slug)}
