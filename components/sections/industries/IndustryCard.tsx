@@ -17,7 +17,7 @@ export function IndustryCard({
     <div
       tabIndex={0}
       className={cn(
-        "group/card relative h-[560px] flex-1 overflow-hidden border-r border-hairline outline-none",
+        "group/card relative h-[560px] flex-1 overflow-hidden border-r border-white/10 outline-none",
         "transition-[flex-grow] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]",
         "hover:flex-[3] focus-visible:flex-[3]",
         isLast && "border-r-0",

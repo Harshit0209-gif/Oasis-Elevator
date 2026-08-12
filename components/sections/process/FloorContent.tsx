@@ -1,10 +1,12 @@
 import { forwardRef, type CSSProperties } from "react";
 import type { ProcessStep } from "@/data/types";
+import { cn } from "@/lib/utils";
 import { resolveProcessIcon } from "./process-icons";
 
 interface FloorContentProps {
   step: ProcessStep;
   style?: CSSProperties;
+  dark?: boolean;
 }
 
 // One floor's copy. In the scroll-track context, `style` pins its share of
@@ -15,7 +17,7 @@ interface FloorContentProps {
 // data-state (set imperatively from the scrub loop) controls emphasis: the
 // active floor reads at full strength, passed floors dim, upcoming floors
 // stay subtle — same hierarchy at every viewport width.
-export const FloorContent = forwardRef<HTMLDivElement, FloorContentProps>(({ step, style }, ref) => {
+export const FloorContent = forwardRef<HTMLDivElement, FloorContentProps>(({ step, style, dark = false }, ref) => {
   const Icon = resolveProcessIcon(step.icon);
 
   return (
@@ -26,17 +28,34 @@ export const FloorContent = forwardRef<HTMLDivElement, FloorContentProps>(({ ste
       className="group flex w-full shrink-0 scale-[0.97] flex-col justify-center gap-3 px-6 opacity-30 transition-[opacity,transform] duration-300 ease-out sm:px-10 md:px-14 data-[state=active]:scale-100 data-[state=active]:opacity-100 data-[state=passed]:opacity-30"
     >
       {Icon && (
-        <div className="flex size-10 items-center justify-center rounded-full bg-brand-blue/8 transition-colors duration-300 group-data-[state=active]:bg-brand-blue/15 sm:size-11">
-          <Icon className="size-4.5 text-brand-blue sm:size-5" strokeWidth={1.75} />
+        <div
+          className={cn(
+            "flex size-10 items-center justify-center rounded-full transition-colors duration-300 sm:size-11",
+            dark
+              ? "bg-white/10 group-data-[state=active]:bg-white/20"
+              : "bg-brand-blue/8 group-data-[state=active]:bg-brand-blue/15",
+          )}
+        >
+          <Icon className={cn("size-4.5 sm:size-5", dark ? "text-accent-blue" : "text-brand-blue")} strokeWidth={1.75} />
         </div>
       )}
-      <span className="font-heading text-xs font-medium tracking-[0.25em] text-brand-blue uppercase">
+      <span
+        className={cn(
+          "font-heading text-xs font-medium tracking-[0.25em] uppercase",
+          dark ? "text-accent-blue" : "text-brand-blue",
+        )}
+      >
         Floor {String(step.order).padStart(2, "0")}
       </span>
-      <h3 className="font-heading text-2xl font-semibold text-navy sm:text-3xl md:text-[2rem]">
+      <h3
+        className={cn(
+          "font-heading text-2xl font-semibold sm:text-3xl md:text-[2rem]",
+          dark ? "text-white" : "text-navy",
+        )}
+      >
         {step.title}
       </h3>
-      <p className="max-w-sm text-sm leading-relaxed text-graphite sm:text-base">
+      <p className={cn("max-w-sm text-sm leading-relaxed sm:text-base", dark ? "text-white/70" : "text-graphite")}>
         {step.description}
       </p>
     </div>

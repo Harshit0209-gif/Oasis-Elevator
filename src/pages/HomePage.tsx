@@ -31,6 +31,7 @@ export function HomePage() {
       <CtaBand
         title="Ready to engineer your next project?"
         description="Tell us about your building and requirements — our team responds within one business day."
+        dark
       />
     </>
   );

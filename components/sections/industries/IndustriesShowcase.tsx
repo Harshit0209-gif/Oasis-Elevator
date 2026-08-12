@@ -11,12 +11,13 @@ export function IndustriesShowcase() {
   const { data: industries, loading } = useContent(getIndustries);
 
   return (
-    <section className="bg-bg-primary py-28 md:py-36">
+    <section className="bg-navy py-28 md:py-36">
       <div className="container-oasis mb-14">
         <SectionHeading
           eyebrow="Industries"
           title="Built for every vertical."
           description="From private residences to critical healthcare infrastructure — engineered mobility for every environment."
+          light
         />
       </div>
 
@@ -27,7 +28,7 @@ export function IndustriesShowcase() {
           <IndustryMobileGallery industries={industries} />
 
           <RevealOnScroll variants={fadeIn} className="hidden lg:block">
-            <div className="flex flex-col border-y border-hairline lg:flex-row">
+            <div className="flex flex-col border-y border-white/10 lg:flex-row">
               {industries.map((industry, index) => (
                 <IndustryCard
                   key={industry.id}

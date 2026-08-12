@@ -12,13 +12,14 @@ export function Testimonials() {
   if (loading || !testimonials || testimonials.length === 0) return null;
 
   return (
-    <section className="bg-bg-primary py-28 md:py-36">
+    <section className="bg-navy py-28 md:py-36">
       <div className="container-oasis mb-14">
         <SectionHeading
           eyebrow="Testimonials"
           title="Trusted by builders of ambition."
           description="What architects, developers and facility teams say after working with Oasis."
           align="center"
+          light
         />
       </div>
 

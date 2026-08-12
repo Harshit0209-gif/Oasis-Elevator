@@ -86,14 +86,15 @@ export function ProcessShaft() {
   );
 
   return (
-    <section ref={rootRef} className="relative bg-bg-primary">
-      {/* Near-invisible architectural blueprint grid */}
+    <section ref={rootRef} className="relative bg-navy">
+      {/* Near-invisible architectural blueprint grid — white lines instead of
+          brand-blue since blue-on-navy at this opacity would be unreadable. */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-[0.035]"
+        className="pointer-events-none absolute inset-0 opacity-[0.05]"
         style={{
           backgroundImage:
-            "linear-gradient(to right, #0C6584 1px, transparent 1px), linear-gradient(to bottom, #0C6584 1px, transparent 1px)",
+            "linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)",
           backgroundSize: "44px 44px",
         }}
       />
@@ -104,6 +105,7 @@ export function ProcessShaft() {
           title="Every floor of the journey."
           description="Scroll to follow a project's journey from first consultation to lifetime maintenance."
           align="center"
+          light
         />
       </div>
 
@@ -123,7 +125,7 @@ export function ProcessShaft() {
           </div>
           <div className="flex flex-1 flex-col gap-9">
             {steps.map((step) => (
-              <FloorContent key={step.id} step={step} />
+              <FloorContent key={step.id} step={step} dark />
             ))}
           </div>
         </div>
@@ -131,7 +133,7 @@ export function ProcessShaft() {
         <div ref={driverRef} className="relative" style={{ height: `${total * SCROLL_PER_FLOOR}svh` }}>
           <div className="sticky top-0 flex h-[100svh]">
             <div className="container-oasis flex h-full w-full">
-              <div className="h-full w-[30%] min-w-[84px] max-w-[220px] shrink-0 border-r border-hairline/60 sm:w-[28%] md:w-[26%] lg:w-[25%]">
+              <div className="h-full w-[30%] min-w-[84px] max-w-[220px] shrink-0 border-r border-white/10 sm:w-[28%] md:w-[26%] lg:w-[25%]">
                 <ShaftColumn
                   steps={steps}
                   carRef={carRef}
@@ -151,6 +153,7 @@ export function ProcessShaft() {
                       }}
                       step={step}
                       style={{ height: `${100 / total}%` }}
+                      dark
                     />
                   ))}
                 </div>
