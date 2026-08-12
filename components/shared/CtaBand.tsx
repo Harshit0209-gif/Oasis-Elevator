@@ -11,10 +11,9 @@ interface CtaBandProps {
   /** Real navigation instead of the contact modal — omit for the default
    * (and much more common) lead-gen behavior. */
   primaryHref?: string;
-  /** Brand-blue background with an orange CTA button instead of the default
-   * light surface — used sparingly as a strong closing color beat (currently
-   * just the homepage's final band). Brand-blue rather than navy so it reads
-   * as its own band instead of merging into the navy footer right below it. */
+  /** Navy background with an orange CTA button instead of the default light
+   * surface — used sparingly as a strong closing color beat (currently just
+   * the homepage's final band, directly above the navy footer). */
   dark?: boolean;
 }
 
@@ -30,7 +29,12 @@ export function CtaBand({
   const buttonClassName = dark ? "bg-accent-orange text-white shadow-sm hover:bg-accent-orange/90" : undefined;
 
   return (
-    <section className={cn("border-t py-24", dark ? "border-white/10 bg-brand-blue" : "border-hairline bg-surface")}>
+    <section
+      className={cn(
+        "border-t py-24",
+        dark ? "border-b border-white/10 bg-navy" : "border-hairline bg-surface",
+      )}
+    >
       <RevealOnScroll className="container-oasis flex flex-col items-center gap-6 text-center">
         <h2
           className={cn(
