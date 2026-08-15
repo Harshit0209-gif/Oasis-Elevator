@@ -48,8 +48,8 @@ export function HeroBackground({ image }: HeroBackgroundProps) {
       )}
 
       {/* Contrast + mood layers */}
-      <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/50 to-navy/30" />
-      <div className="absolute inset-0 bg-gradient-to-r from-navy/70 via-transparent to-navy/40" />
+      <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-navy/35 to-navy/15" />
+      <div className="absolute inset-0 bg-gradient-to-r from-navy/55 via-transparent to-navy/25" />
 
       {/* Slow-drifting light streak */}
       <motion.div

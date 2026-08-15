@@ -93,6 +93,7 @@ export interface CompanyInfo {
   legalName: string;
   tagline: string;
   phone: string;
+  phoneSecondary: string;
   emergencyPhone: string;
   email: string;
   address: {

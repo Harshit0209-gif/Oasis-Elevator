@@ -98,6 +98,14 @@ export function Footer() {
                 <a href={`tel:${settings.phone}`} className="hover:text-accent-orange">
                   {settings.phone}
                 </a>
+                {settings.phoneSecondary && (
+                  <>
+                    {" / "}
+                    <a href={`tel:${settings.phoneSecondary}`} className="hover:text-accent-orange">
+                      {settings.phoneSecondary}
+                    </a>
+                  </>
+                )}
               </li>
               <li>
                 <a href={`mailto:${settings.email}`} className="hover:text-accent-orange">

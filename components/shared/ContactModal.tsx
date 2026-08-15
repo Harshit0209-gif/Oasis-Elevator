@@ -70,13 +70,23 @@ export function ContactModal() {
               </p>
             </div>
             {settings?.phone && (
-              <a
-                href={`tel:${settings.phone}`}
-                className="relative flex items-center gap-2 text-sm text-white/80 transition-colors hover:text-white"
-              >
-                <Phone className="size-4 text-accent-orange" />
-                Prefer to talk? {settings.phone}
-              </a>
+              <p className="relative flex items-center gap-2 text-sm text-white/80">
+                <Phone className="size-4 shrink-0 text-accent-orange" />
+                <span>
+                  Prefer to talk?{" "}
+                  <a href={`tel:${settings.phone}`} className="transition-colors hover:text-white">
+                    {settings.phone}
+                  </a>
+                  {settings.phoneSecondary && (
+                    <>
+                      {" / "}
+                      <a href={`tel:${settings.phoneSecondary}`} className="transition-colors hover:text-white">
+                        {settings.phoneSecondary}
+                      </a>
+                    </>
+                  )}
+                </span>
+              </p>
             )}
           </div>
 

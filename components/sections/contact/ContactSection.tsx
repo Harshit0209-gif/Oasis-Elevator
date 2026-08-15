@@ -41,9 +41,15 @@ export function ContactSection() {
                 </li>
                 <li className="flex items-center gap-4">
                   <Phone className="size-5 shrink-0 text-brand-blue" />
-                  <a href={`tel:${settings.phone}`} className="text-sm">
-                    {settings.phone}
-                  </a>
+                  <span className="text-sm">
+                    <a href={`tel:${settings.phone}`}>{settings.phone}</a>
+                    {settings.phoneSecondary && (
+                      <>
+                        {" / "}
+                        <a href={`tel:${settings.phoneSecondary}`}>{settings.phoneSecondary}</a>
+                      </>
+                    )}
+                  </span>
                 </li>
                 <li className="flex items-center gap-4">
                   <Mail className="size-5 shrink-0 text-brand-blue" />

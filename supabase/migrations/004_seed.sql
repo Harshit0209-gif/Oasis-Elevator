@@ -12,7 +12,7 @@ update site_settings set
   company_name = 'Oasis Elevators Pvt. Ltd.',
   phone = '+91 90023 43706',
   emergency_phone = '+91 94311 86893',
-  email = 'info@oasiselevators.co.in',
+  email = 'connect@oasiselevators.in',
   address_line1 = 'Uttaran Regency',
   address_line2 = '19 No. Nabadiganta',
   city = 'Kolkata',
