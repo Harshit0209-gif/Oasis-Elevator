@@ -27,3 +27,12 @@ export function destroyLenis(lenis: Lenis) {
   lenis.destroy();
   if (activeLenis === lenis) activeLenis = null;
 }
+
+// Lenis drives its own independent scroll loop — a plain window.scrollTo()
+// gets silently overridden on the next animation frame by Lenis re-applying
+// its own (stale) internal scroll position. Anything that needs to force
+// the scroll position (e.g. resetting to top on route change) must go
+// through Lenis itself when it's active.
+export function getActiveLenis() {
+  return activeLenis;
+}
