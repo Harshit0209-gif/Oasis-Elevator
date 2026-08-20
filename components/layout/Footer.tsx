@@ -121,11 +121,14 @@ export function Footer() {
       </div>
 
       <div className="border-t border-white/10">
-        <div className="container-oasis flex flex-col items-center justify-between gap-4 py-6 text-xs text-white/60 md:flex-row">
+        <div className="container-oasis flex flex-col items-center justify-between gap-2 py-6 text-xs text-white/60 md:flex-row md:gap-4">
           <p>
             © {year} {footerSection?.copyright_text ?? settings?.legalName}
           </p>
-          <p>Engineered in India.</p>
+          <div className="flex items-center gap-4">
+            <p>Engineered in India.</p>
+            <p>Powered by GOBT</p>
+          </div>
         </div>
       </div>
     </footer>
