@@ -125,10 +125,8 @@ export function Footer() {
           <p>
             © {year} {footerSection?.copyright_text ?? settings?.legalName}
           </p>
-          <div className="flex items-center gap-4">
-            <p>Engineered in India.</p>
-            <p>Powered by GOBT</p>
-          </div>
+          <p>Powered by GOBT</p>
+          <p>Engineered in India.</p>
         </div>
       </div>
     </footer>

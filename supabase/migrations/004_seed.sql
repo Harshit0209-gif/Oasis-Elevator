@@ -9,7 +9,7 @@
 -- Singletons
 -- ============================================================
 update site_settings set
-  company_name = 'Oasis Elevators Pvt. Ltd.',
+  company_name = 'Oasis Elevators',
   phone = '+91 90023 43706',
   emergency_phone = '+91 94311 86893',
   email = 'connect@oasiselevators.in',
@@ -26,7 +26,7 @@ update site_settings set
   instagram_url = 'https://www.instagram.com/oasiselevators/',
   primary_cta_text = 'Request Quote',
   primary_cta_link = '/contact',
-  copyright_text = 'Oasis Elevators Pvt. Ltd. All rights reserved.'
+  copyright_text = 'Oasis Elevators All rights reserved.'
 where id = 1;
 
 update hero set
@@ -47,7 +47,7 @@ update about_section set
   description = 'Since 2015, we''ve been Kolkata''s trusted name in vertical mobility — a privately owned, licensed lift company engineering journeys, not just installing elevators.',
   image_url = '/images/oasis.png',
   supporting_points = '[
-    {"title": "Engineering, not just installation.", "description": "Oasis Elevators Pvt. Ltd. is a registered and licensed company for the erection and maintenance of elevators, delivering the full journey end to end — design, manufacture and installation, through to ongoing maintenance and modernization. Every project starts with the building, not a catalogue."},
+    {"title": "Engineering, not just installation.", "description": "Oasis Elevators is a registered and licensed company for the erection and maintenance of elevators, delivering the full journey end to end — design, manufacture and installation, through to ongoing maintenance and modernization. Every project starts with the building, not a catalogue."},
     {"title": "Quality over quantity.", "description": "We extend hassle-free service, 24×7. \"Quality and not the quantity\" has been the motto of our work culture since day one — when you think of safety and security in vertical mobility, that''s the standard we hold ourselves to."}
   ]'::jsonb,
   mission_items = '[
@@ -59,7 +59,7 @@ where id = 1;
 
 update footer_section set
   description = 'Building Up Vision, Leading Future — premium vertical mobility engineered for architecture that demands more.',
-  copyright_text = 'Oasis Elevators Pvt. Ltd. All rights reserved.'
+  copyright_text = 'Oasis Elevators All rights reserved.'
 where id = 1;
 
 -- ============================================================
@@ -83,7 +83,8 @@ insert into products (slug, name, category, short_description, features, ideal_f
 ('hospital-elevator', 'Hospital Elevator', 'Critical Care Mobility', 'Stretcher-and-bed-friendly cabins engineered for speed, hygiene, and silence.', array['Antimicrobial surfaces','Emergency power override','Wide-clearance doors'], 'Hospitals & healthcare facilities', '/images/products/hospital-1.jpg', 'Hospital attendant wheeling a bed into a stainless steel hospital elevator', 2, 'published'),
 ('home-elevator', 'Home Elevator', 'Residential Luxury', 'Compact, quiet, and beautifully finished mobility for the modern private residence.', array['Space-saving footprint','Bespoke interior finishes','Whisper-quiet hydraulics'], 'Private residences & villas', '/images/products/home-1.jpg', 'Compact glass-cabin home elevator installed beside a wooden staircase', 3, 'published'),
 ('machine-room-less-elevator', 'Machine Room-Less Elevator', 'Space-Efficient Engineering', 'Compact drive engineering that reclaims valuable building space without compromise.', array['No dedicated machine room','Reduced energy footprint','Compact shaft design'], 'Space-constrained buildings', '/images/products/mrl-1.jpg', 'Compact machine-room-less gearless traction machine mounted in the shaft head', 4, 'published'),
-('hydraulic-elevator', 'Hydraulic Elevator', 'Low-Rise Precision', 'Robust hydraulic systems engineered for smooth, precise low-rise performance.', array['Precision leveling','Low maintenance design','Reliable for low-rise buildings'], 'Low-rise buildings up to 6 floors', '/images/products/hydraulic-1.jpg', 'Cylindrical glass hydraulic elevator cabin on a steel frame', 5, 'published')
+('hydraulic-elevator', 'Hydraulic Elevator', 'Low-Rise Precision', 'Robust hydraulic systems engineered for smooth, precise low-rise performance.', array['Precision leveling','Low maintenance design','Reliable for low-rise buildings'], 'Low-rise buildings up to 6 floors', '/images/products/hydraulic-1.png', 'Cylindrical glass hydraulic elevator cabin on a steel frame', 5, 'published'),
+('goods-elevator', 'Goods Elevator', 'Industrial & Freight', 'Heavy-duty elevators engineered to move goods and materials safely across warehouses, factories and commercial back-of-house spaces.', array['High load capacity','Reinforced cabin flooring','Built for continuous industrial use'], 'Warehouses, factories and loading docks', '/images/products/goods-1.png', 'Goods elevator', 6, 'published')
 on conflict (slug) do nothing;
 
 -- ============================================================

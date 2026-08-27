@@ -1,3 +1,4 @@
+import { ImageOff } from "lucide-react";
 import type { Product } from "@/data/types";
 import { RevealOnScroll } from "@/components/shared/RevealOnScroll";
 import { OptimizedImage } from "@/components/shared/OptimizedImage";
@@ -6,13 +7,19 @@ import { SpecList } from "./SpecList";
 export function ProductListCard({ product }: { product: Product }) {
   return (
     <RevealOnScroll id={product.slug} className="flex flex-col gap-5">
-      <OptimizedImage
-        src={product.image.src}
-        alt={product.image.alt}
-        fill
-        sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-        containerClassName="aspect-[4/3] w-full rounded-2xl border border-hairline"
-      />
+      {product.image.src ? (
+        <OptimizedImage
+          src={product.image.src}
+          alt={product.image.alt}
+          fill
+          sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+          containerClassName="aspect-[4/3] w-full rounded-2xl border border-hairline"
+        />
+      ) : (
+        <div className="flex aspect-[4/3] w-full items-center justify-center rounded-2xl border border-hairline bg-surface text-graphite/40">
+          <ImageOff className="size-8" />
+        </div>
+      )}
       <div className="flex flex-col gap-3">
         <span className="font-heading text-xs uppercase tracking-[0.25em] text-brand-blue">
           {product.category}
