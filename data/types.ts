@@ -88,29 +88,3 @@ export interface Service {
   image: ImageAsset;
   icon?: string;
 }
-
-export interface CompanyInfo {
-  legalName: string;
-  tagline: string;
-  phone: string;
-  phoneSecondary: string;
-  emergencyPhone: string;
-  email: string;
-  address: {
-    line1: string;
-    line2: string;
-    city: string;
-    state: string;
-    postalCode: string;
-    country: string;
-  };
-  geo: {
-    lat: number;
-    lng: number;
-  };
-  socials: {
-    facebook: string;
-    linkedin: string;
-    instagram: string;
-  };
-}

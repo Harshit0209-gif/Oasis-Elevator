@@ -40,6 +40,10 @@ yarn-error.log*
 # OS
 Thumbs.db
 
-# local reference/scratch media (screen recordings etc. dropped in repo root)
+# local reference/scratch media (screen recordings, design mockups, staging
+# photos dropped in the repo for review or pending manual CMS upload — not
+# served by the built site, so no reason for them to be tracked)
 *.mp4
 *.mov
+public/about.png
+public/why oasis *.png

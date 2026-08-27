@@ -112,14 +112,6 @@ export interface ProductRow extends OrderedRow {
   featured: boolean;
 }
 
-export interface ProductGalleryRow {
-  id: string;
-  product_id: string;
-  image_url: string;
-  alt_text: string | null;
-  display_order: number;
-}
-
 export interface ServiceRow extends OrderedRow {
   id: string;
   title: string;
@@ -275,35 +267,4 @@ export interface AdminProfileRow {
   role: "admin" | "editor";
   is_active: boolean;
   created_at: string;
-}
-
-// Minimal Database shape — enough for supabase-js's generic typing without
-// hand-maintaining the full Insert/Update/Relationships variants per table.
-export interface Database {
-  public: {
-    Tables: {
-      site_settings: { Row: SiteSettingsRow; Insert: Partial<SiteSettingsRow>; Update: Partial<SiteSettingsRow> };
-      hero: { Row: HeroRow; Insert: Partial<HeroRow>; Update: Partial<HeroRow> };
-      about_section: { Row: AboutSectionRow; Insert: Partial<AboutSectionRow>; Update: Partial<AboutSectionRow> };
-      footer_section: { Row: FooterSectionRow; Insert: Partial<FooterSectionRow>; Update: Partial<FooterSectionRow> };
-      why_oasis_items: { Row: WhyOasisItemRow; Insert: Partial<WhyOasisItemRow>; Update: Partial<WhyOasisItemRow> };
-      products: { Row: ProductRow; Insert: Partial<ProductRow>; Update: Partial<ProductRow> };
-      product_gallery: { Row: ProductGalleryRow; Insert: Partial<ProductGalleryRow>; Update: Partial<ProductGalleryRow> };
-      services: { Row: ServiceRow; Insert: Partial<ServiceRow>; Update: Partial<ServiceRow> };
-      industries: { Row: IndustryRow; Insert: Partial<IndustryRow>; Update: Partial<IndustryRow> };
-      process_steps: { Row: ProcessStepRow; Insert: Partial<ProcessStepRow>; Update: Partial<ProcessStepRow> };
-      projects: { Row: ProjectRow; Insert: Partial<ProjectRow>; Update: Partial<ProjectRow> };
-      project_gallery: { Row: ProjectGalleryRow; Insert: Partial<ProjectGalleryRow>; Update: Partial<ProjectGalleryRow> };
-      testimonials: { Row: TestimonialRow; Insert: Partial<TestimonialRow>; Update: Partial<TestimonialRow> };
-      statistics: { Row: StatisticRow; Insert: Partial<StatisticRow>; Update: Partial<StatisticRow> };
-      certifications: { Row: CertificationRow; Insert: Partial<CertificationRow>; Update: Partial<CertificationRow> };
-      faqs: { Row: FaqRow; Insert: Partial<FaqRow>; Update: Partial<FaqRow> };
-      clients: { Row: ClientRow; Insert: Partial<ClientRow>; Update: Partial<ClientRow> };
-      navigation_items: { Row: NavigationItemRow; Insert: Partial<NavigationItemRow>; Update: Partial<NavigationItemRow> };
-      seo_settings: { Row: SeoSettingsRow; Insert: Partial<SeoSettingsRow>; Update: Partial<SeoSettingsRow> };
-      media: { Row: MediaRow; Insert: Partial<MediaRow>; Update: Partial<MediaRow> };
-      activity_logs: { Row: ActivityLogRow; Insert: Partial<ActivityLogRow>; Update: Partial<ActivityLogRow> };
-      admin_profiles: { Row: AdminProfileRow; Insert: Partial<AdminProfileRow>; Update: Partial<AdminProfileRow> };
-    };
-  };
 }

@@ -26,7 +26,6 @@ export function ContactPopupCard() {
     // Deliberately runs once per mount (this component lives above <Routes>
     // and never remounts on navigation) — not re-keyed off location, so
     // switching pages during the delay doesn't restart the timer.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
