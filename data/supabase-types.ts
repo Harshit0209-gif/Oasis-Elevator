@@ -18,7 +18,6 @@ export interface SiteSettingsRow {
   favicon_url: string | null;
   phone: string | null;
   phone_secondary: string | null;
-  phone_tertiary: string | null;
   emergency_phone: string | null;
   email: string | null;
   address_line1: string | null;
