@@ -52,6 +52,9 @@ export function SettingsEditor() {
         <Field label="Second phone" helpText="Shown alongside the first phone number wherever it appears.">
           <Input value={form.phone_secondary ?? ""} onChange={(e) => set("phone_secondary", e.target.value)} />
         </Field>
+        <Field label="Third phone" helpText="Shown alongside the other phone numbers wherever they appear.">
+          <Input value={form.phone_tertiary ?? ""} onChange={(e) => set("phone_tertiary", e.target.value)} />
+        </Field>
         <Field label="Emergency / alternate phone">
           <Input value={form.emergency_phone ?? ""} onChange={(e) => set("emergency_phone", e.target.value)} />
         </Field>

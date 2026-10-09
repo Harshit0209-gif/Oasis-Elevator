@@ -106,6 +106,7 @@ export interface CompanyContent {
   tagline: string;
   phone: string;
   phoneSecondary: string;
+  phoneTertiary: string;
   emergencyPhone: string;
   email: string;
   address: {
@@ -132,6 +133,7 @@ export async function getSiteSettings(): Promise<CompanyContent> {
     tagline: row.primary_cta_text ?? "",
     phone: row.phone ?? "",
     phoneSecondary: row.phone_secondary ?? "",
+    phoneTertiary: row.phone_tertiary ?? "",
     emergencyPhone: row.emergency_phone ?? "",
     email: row.email ?? "",
     address: {

@@ -85,6 +85,14 @@ export function ContactModal() {
                       </a>
                     </>
                   )}
+                  {settings.phoneTertiary && (
+                    <>
+                      {" / "}
+                      <a href={`tel:${settings.phoneTertiary}`} className="transition-colors hover:text-white">
+                        {settings.phoneTertiary}
+                      </a>
+                    </>
+                  )}
                 </span>
               </p>
             )}

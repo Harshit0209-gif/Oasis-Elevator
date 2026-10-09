@@ -49,6 +49,12 @@ export function ContactSection() {
                         <a href={`tel:${settings.phoneSecondary}`}>{settings.phoneSecondary}</a>
                       </>
                     )}
+                    {settings.phoneTertiary && (
+                      <>
+                        {" / "}
+                        <a href={`tel:${settings.phoneTertiary}`}>{settings.phoneTertiary}</a>
+                      </>
+                    )}
                   </span>
                 </li>
                 <li className="flex items-center gap-4">

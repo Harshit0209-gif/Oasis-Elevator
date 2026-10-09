@@ -106,6 +106,14 @@ export function Footer() {
                     </a>
                   </>
                 )}
+                {settings.phoneTertiary && (
+                  <>
+                    {" / "}
+                    <a href={`tel:${settings.phoneTertiary}`} className="hover:text-accent-orange">
+                      {settings.phoneTertiary}
+                    </a>
+                  </>
+                )}
               </li>
               <li>
                 <a href={`mailto:${settings.email}`} className="hover:text-accent-orange">
