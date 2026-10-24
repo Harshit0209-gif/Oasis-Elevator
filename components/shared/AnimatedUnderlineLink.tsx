@@ -6,22 +6,33 @@ interface AnimatedUnderlineLinkProps {
   href: string;
   children: ReactNode;
   className?: string;
+  /** Static file to download — rendered as a plain anchor, since the router
+      would otherwise treat the path as a (missing) page. */
+  download?: string;
 }
 
 export function AnimatedUnderlineLink({
   href,
   children,
   className,
+  download,
 }: AnimatedUnderlineLinkProps) {
+  const classes = cn(
+    "group/link relative inline-block w-fit text-current",
+    "after:absolute after:inset-x-0 after:-bottom-0.5 after:h-px after:origin-left after:scale-x-0 after:bg-current after:transition-transform after:duration-300 after:ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/link:after:scale-x-100 hover:after:scale-x-100",
+    className,
+  );
+
+  if (download) {
+    return (
+      <a href={href} download={download} className={classes}>
+        {children}
+      </a>
+    );
+  }
+
   return (
-    <Link
-      to={href}
-      className={cn(
-        "group/link relative inline-block w-fit text-current",
-        "after:absolute after:inset-x-0 after:-bottom-0.5 after:h-px after:origin-left after:scale-x-0 after:bg-current after:transition-transform after:duration-300 after:ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/link:after:scale-x-100 hover:after:scale-x-100",
-        className,
-      )}
-    >
+    <Link to={href} className={classes}>
       {children}
     </Link>
   );

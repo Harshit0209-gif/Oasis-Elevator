@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { getNavigation } from "@/lib/content";
+import { BROCHURE_FILENAME, BROCHURE_LABEL, BROCHURE_URL } from "@/lib/brochure";
 import { useContent } from "@/hooks/use-content";
 import { useContactModal } from "@/lib/contact-modal-context";
 import { Logo } from "@/components/shared/Logo";
@@ -61,6 +62,18 @@ export function Navbar() {
               {link.label}
             </AnimatedUnderlineLink>
           ))}
+          <AnimatedUnderlineLink
+            href={BROCHURE_URL}
+            download={BROCHURE_FILENAME}
+            className={cn(
+              "font-heading text-[0.8rem] font-medium uppercase tracking-[0.12em] transition-colors",
+              overDark
+                ? "text-white/90 hover:text-white"
+                : "text-navy/80 hover:text-brand-blue",
+            )}
+          >
+            {BROCHURE_LABEL}
+          </AnimatedUnderlineLink>
         </nav>
 
         <div className="hidden lg:block">

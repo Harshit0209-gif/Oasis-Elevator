@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Menu } from "lucide-react";
 import { getNavigation } from "@/lib/content";
+import { BROCHURE_FILENAME, BROCHURE_LABEL, BROCHURE_URL } from "@/lib/brochure";
 import { useContent } from "@/hooks/use-content";
 import { useContactModal } from "@/lib/contact-modal-context";
 import { Button } from "@/components/ui/button";
@@ -48,6 +49,15 @@ export function MobileMenu({ scrolled = false }: { scrolled?: boolean }) {
                 </Link>
               </SheetClose>
             ))}
+            <SheetClose asChild>
+              <a
+                href={BROCHURE_URL}
+                download={BROCHURE_FILENAME}
+                className="border-b border-hairline py-4 font-heading text-2xl font-medium text-navy transition-colors hover:text-brand-blue"
+              >
+                {BROCHURE_LABEL}
+              </a>
+            </SheetClose>
           </nav>
 
           <div className="mt-auto pt-8">
