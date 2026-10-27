@@ -62,7 +62,7 @@ export function ContactModal() {
               <Logo variant="chip" />
             </div>
             <div className="relative flex flex-col gap-4">
-              <h2 className="font-heading text-3xl font-medium leading-tight">
+              <h2 className="font-heading text-3xl font-medium leading-tight text-white">
                 Let's Elevate Your Project
               </h2>
               <p className="text-white/70">

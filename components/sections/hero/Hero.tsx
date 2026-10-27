@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { FileDown } from "lucide-react";
+import { BROCHURE_FILENAME, BROCHURE_URL } from "@/lib/brochure";
 import { getHero } from "@/lib/content";
 import { useContent } from "@/hooks/use-content";
 import { useContactModal } from "@/lib/contact-modal-context";
@@ -79,6 +81,18 @@ export function Hero() {
                 </Button>
               )}
             </motion.div>
+
+            <motion.a
+              href={BROCHURE_URL}
+              download={BROCHURE_FILENAME}
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: premiumEase, delay: 1 }}
+              className="mt-5 inline-flex items-center gap-2 text-sm text-white/70 underline-offset-4 transition-colors hover:text-white hover:underline"
+            >
+              <FileDown className="size-4" />
+              Download Brochure (PDF)
+            </motion.a>
           </>
         )}
       </div>

@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
-const FALLBACK_IMAGE = "/Hero.png";
+const FALLBACK_IMAGE = "/images/Hero%20bg.png";
 
 interface HeroBackgroundProps {
   image?: { src: string; alt: string };
