@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Menu } from "lucide-react";
 import { getNavigation } from "@/lib/content";
-import { BROCHURE_FILENAME, BROCHURE_LABEL, BROCHURE_URL } from "@/lib/brochure";
+import { BROCHURE_FILENAME, BROCHURE_LABEL, BROCHURE_URL, isBrochureLabel } from "@/lib/brochure";
 import { useContent } from "@/hooks/use-content";
 import { useContactModal } from "@/lib/contact-modal-context";
 import { Button } from "@/components/ui/button";
@@ -39,7 +39,7 @@ export function MobileMenu({ scrolled = false }: { scrolled?: boolean }) {
           <Logo />
 
           <nav className="mt-12 flex flex-col gap-1">
-            {(navLinks ?? []).map((link) => (
+            {(navLinks ?? []).filter((link) => !isBrochureLabel(link.label)).map((link) => (
               <SheetClose asChild key={link.href}>
                 <Link
                   to={link.href}
