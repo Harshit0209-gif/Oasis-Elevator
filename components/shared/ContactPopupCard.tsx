@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import { XIcon, ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronDown, ChevronUp } from "lucide-react";
 import { ContactForm } from "@/components/sections/contact/ContactForm";
 import { useContactModal } from "@/lib/contact-modal-context";
 import { premiumEase } from "@/lib/motion";
@@ -9,43 +9,60 @@ import { cn } from "@/lib/utils";
 
 const SHOW_DELAY_MS = 12000;
 const SHOW_AFTER_SCROLL_PX = 600;
-const DISMISSED_KEY = "oasis-contact-card-dismissed";
+const MINIMIZED_DELAY_MS = 2000;
+const SEEN_KEY = "oasis-contact-card-seen";
 
 // Browser storage can throw (private windows, blocked site data) — the card
-// just falls back to showing again on the next visit.
-function wasDismissed() {
+// then just behaves as a first visit every time.
+function hasSeenCard() {
   try {
-    return window.sessionStorage.getItem(DISMISSED_KEY) === "1";
+    return window.localStorage.getItem(SEEN_KEY) === "1";
   } catch {
     return false;
   }
 }
 
-function rememberDismissed() {
+function markCardSeen() {
   try {
-    window.sessionStorage.setItem(DISMISSED_KEY, "1");
+    window.localStorage.setItem(SEEN_KEY, "1");
   } catch {
     /* ignore */
   }
 }
 
-// A small, non-modal "Let's talk" card that self-shows on every visit —
-// separate from <ContactModal>, which stays reserved for deliberate CTA
-// clicks (navbar/hero/footer "Request Quote" etc.) and keeps its centered,
-// scroll-locked, focus-trapped modal treatment. This card never blocks the
-// page: no backdrop, no scroll lock.
+// A small, non-modal "Let's talk" card — separate from <ContactModal>, which
+// stays reserved for deliberate CTA clicks (navbar/hero/footer "Request
+// Quote" etc.) and keeps its centered, scroll-locked, focus-trapped modal
+// treatment. This card never blocks the page: no backdrop, no scroll lock.
+//
+// It expands on its own only once, on a visitor's first visit. From then on
+// (and whenever they collapse it) it sits as a small minimized bar that
+// they open themselves, so it never pops up at them again.
 export function ContactPopupCard() {
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
   const { isOpen: mainModalOpen } = useContactModal();
   const location = useLocation();
 
-  // Stays out of the way of the hero: appears once the visitor has either
-  // scrolled into the page or been here a while, and not at all once they've
-  // dismissed it this session.
   useEffect(() => {
-    if (wasDismissed()) return;
-    const show = () => setIsOpen(true);
+    // Returning visitor: show just the minimized bar, shortly after load.
+    if (hasSeenCard()) {
+      const timer = window.setTimeout(() => {
+        setIsMinimized(true);
+        setIsOpen(true);
+      }, MINIMIZED_DELAY_MS);
+      return () => window.clearTimeout(timer);
+    }
+
+    // First visit: expand once, after they've scrolled in or been here a
+    // while so it doesn't compete with the hero.
+    let shown = false;
+    const show = () => {
+      if (shown) return;
+      shown = true;
+      setIsOpen(true);
+      markCardSeen();
+    };
     const timer = window.setTimeout(show, SHOW_DELAY_MS);
     const onScroll = () => {
       if (window.scrollY > SHOW_AFTER_SCROLL_PX) show();
@@ -56,23 +73,17 @@ export function ContactPopupCard() {
       window.removeEventListener("scroll", onScroll);
     };
     // Deliberately runs once per mount (this component lives above <Routes>
-    // and never remounts on navigation) — not re-keyed off location, so
-    // switching pages during the delay doesn't restart the timer.
+    // and never remounts on navigation).
   }, []);
 
   useEffect(() => {
-    if (!isOpen) return;
+    if (!isOpen || isMinimized) return;
     function onKeyDown(event: KeyboardEvent) {
-      if (event.key === "Escape") dismiss();
+      if (event.key === "Escape") setIsMinimized(true);
     }
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [isOpen]);
-
-  function dismiss() {
-    setIsOpen(false);
-    rememberDismissed();
-  }
+  }, [isOpen, isMinimized]);
 
   // The dedicated /contact page already leads with the full form — a
   // duplicate auto-popup there would just be redundant. Hide instead of
@@ -117,14 +128,6 @@ export function ContactPopupCard() {
                 className="flex size-8 items-center justify-center rounded-full text-graphite transition-colors hover:bg-surface hover:text-navy"
               >
                 {isMinimized ? <ChevronUp className="size-4" /> : <ChevronDown className="size-4" />}
-              </button>
-              <button
-                type="button"
-                aria-label="Close"
-                onClick={dismiss}
-                className="flex size-8 items-center justify-center rounded-full text-graphite transition-colors hover:bg-surface hover:text-navy"
-              >
-                <XIcon className="size-4" />
               </button>
             </div>
           </div>
