@@ -9,6 +9,7 @@ interface AnimatedUnderlineLinkProps {
   /** Static file to download — rendered as a plain anchor, since the router
       would otherwise treat the path as a (missing) page. */
   download?: string;
+  onClick?: () => void;
 }
 
 export function AnimatedUnderlineLink({
@@ -16,6 +17,7 @@ export function AnimatedUnderlineLink({
   children,
   className,
   download,
+  onClick,
 }: AnimatedUnderlineLinkProps) {
   const classes = cn(
     "group/link relative inline-block w-fit text-current",
@@ -25,7 +27,7 @@ export function AnimatedUnderlineLink({
 
   if (download) {
     return (
-      <a href={href} download={download} className={classes}>
+      <a href={href} download={download} onClick={onClick} className={classes}>
         {children}
       </a>
     );

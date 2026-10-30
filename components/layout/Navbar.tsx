@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { getNavigation } from "@/lib/content";
-import { BROCHURE_FILENAME, BROCHURE_LABEL, BROCHURE_URL, isBrochureLabel } from "@/lib/brochure";
+import { BROCHURE_FILENAME, BROCHURE_LABEL, BROCHURE_URL, isBrochureLabel, trackBrochureDownload } from "@/lib/brochure";
 import { useContent } from "@/hooks/use-content";
 import { useContactModal } from "@/lib/contact-modal-context";
 import { Logo } from "@/components/shared/Logo";
@@ -65,6 +65,7 @@ export function Navbar() {
           <AnimatedUnderlineLink
             href={BROCHURE_URL}
             download={BROCHURE_FILENAME}
+            onClick={() => trackBrochureDownload("navbar")}
             className={cn(
               "font-heading text-[0.8rem] font-medium uppercase tracking-[0.12em] transition-colors",
               overDark

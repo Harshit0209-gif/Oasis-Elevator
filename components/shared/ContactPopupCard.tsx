@@ -7,7 +7,27 @@ import { useContactModal } from "@/lib/contact-modal-context";
 import { premiumEase } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
-const SHOW_DELAY_MS = 5000;
+const SHOW_DELAY_MS = 12000;
+const SHOW_AFTER_SCROLL_PX = 600;
+const DISMISSED_KEY = "oasis-contact-card-dismissed";
+
+// Browser storage can throw (private windows, blocked site data) — the card
+// just falls back to showing again on the next visit.
+function wasDismissed() {
+  try {
+    return window.sessionStorage.getItem(DISMISSED_KEY) === "1";
+  } catch {
+    return false;
+  }
+}
+
+function rememberDismissed() {
+  try {
+    window.sessionStorage.setItem(DISMISSED_KEY, "1");
+  } catch {
+    /* ignore */
+  }
+}
 
 // A small, non-modal "Let's talk" card that self-shows on every visit —
 // separate from <ContactModal>, which stays reserved for deliberate CTA
@@ -20,9 +40,21 @@ export function ContactPopupCard() {
   const { isOpen: mainModalOpen } = useContactModal();
   const location = useLocation();
 
+  // Stays out of the way of the hero: appears once the visitor has either
+  // scrolled into the page or been here a while, and not at all once they've
+  // dismissed it this session.
   useEffect(() => {
-    const timer = window.setTimeout(() => setIsOpen(true), SHOW_DELAY_MS);
-    return () => window.clearTimeout(timer);
+    if (wasDismissed()) return;
+    const show = () => setIsOpen(true);
+    const timer = window.setTimeout(show, SHOW_DELAY_MS);
+    const onScroll = () => {
+      if (window.scrollY > SHOW_AFTER_SCROLL_PX) show();
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.clearTimeout(timer);
+      window.removeEventListener("scroll", onScroll);
+    };
     // Deliberately runs once per mount (this component lives above <Routes>
     // and never remounts on navigation) — not re-keyed off location, so
     // switching pages during the delay doesn't restart the timer.
@@ -31,11 +63,16 @@ export function ContactPopupCard() {
   useEffect(() => {
     if (!isOpen) return;
     function onKeyDown(event: KeyboardEvent) {
-      if (event.key === "Escape") setIsOpen(false);
+      if (event.key === "Escape") dismiss();
     }
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [isOpen]);
+
+  function dismiss() {
+    setIsOpen(false);
+    rememberDismissed();
+  }
 
   // The dedicated /contact page already leads with the full form — a
   // duplicate auto-popup there would just be redundant. Hide instead of
@@ -84,7 +121,7 @@ export function ContactPopupCard() {
               <button
                 type="button"
                 aria-label="Close"
-                onClick={() => setIsOpen(false)}
+                onClick={dismiss}
                 className="flex size-8 items-center justify-center rounded-full text-graphite transition-colors hover:bg-surface hover:text-navy"
               >
                 <XIcon className="size-4" />
